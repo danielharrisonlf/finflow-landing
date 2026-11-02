@@ -35,6 +35,7 @@ pnpm dev
 pnpm lint
 pnpm build
 pnpm test:e2e
+node scripts/verify-production.mjs
 ```
 
 Os testes usam Chromium com Playwright e axe. Na primeira instalação, se necessário, execute `pnpm exec playwright install chromium`. Os relatórios e screenshots ficam em `test-results/`, ignorado pelo Git.

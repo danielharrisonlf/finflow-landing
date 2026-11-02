@@ -36,7 +36,7 @@ test.describe('landing responsiva', () => {
       page.on('pageerror', (error) => jsErrors.push(error.message))
       await page.setViewportSize({ width: viewport.width, height: viewport.height })
       await page.goto('/')
-      await expect(page.getByRole('heading', { level: 1 })).toContainText('O controle financeiro')
+      await expect(page.getByRole('heading', { level: 1 })).toHaveText('O controle financeiro que pensa como um desenvolvedor. E age como o seu CFO.')
       await expect(page.locator('html')).toHaveClass(/motion-ready/)
       await scrollFullPage(page)
       await page.waitForFunction(() => Array.from(document.images).every((image) => image.complete), null, { timeout: 8000 }).catch(() => {})

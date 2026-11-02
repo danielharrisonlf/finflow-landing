@@ -547,13 +547,13 @@ function Hero() {
           <ArrowRight size={13} />
         </a>
         <h1>
-          O controle financeiro que
+          O controle financeiro que{" "}
           <br className="desktop-break" />
-          pensa como um <span>desenvolvedor.</span>
+          pensa como um <span>desenvolvedor.</span>{" "}
           <br className="desktop-break" />E age como o seu CFO.
         </h1>
         <p>
-          Precisão em cada centavo. Clareza em cada decisão.
+          Precisão em cada centavo. Clareza em cada decisão.{" "}
           <br />
           Web, terminal, Telegram e agentes de IA. Suas finanças, na sua
           linguagem.

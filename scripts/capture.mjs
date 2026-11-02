@@ -10,7 +10,9 @@ await page.waitForTimeout(1200)
 await page.screenshot({ path: 'test-results/design-desktop.png' })
 if (!process.env.CAPTURE_URL) {
   await page.setViewportSize({ width: 1200, height: 630 })
-  await page.screenshot({ path: 'public/social.png' })
+  await page.emulateMedia({ reducedMotion: 'reduce' })
+  await page.screenshot({ path: 'public/social.png', animations: 'disabled' })
+  await page.emulateMedia({ reducedMotion: 'no-preference' })
   await page.setViewportSize({ width: 1440, height: 1000 })
 }
 await page.locator('#interfaces').scrollIntoViewIfNeeded()
