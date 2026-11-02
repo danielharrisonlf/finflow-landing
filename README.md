@@ -1,30 +1,32 @@
-# FinFlow · Landing page
+# FinFlow · O dinheiro organizado. A cabeça mais leve.
 
-Uma nova presença para o FinFlow: precisão em cada centavo, quatro interfaces e suas finanças na sua linguagem.
+Landing pública do FinFlow para pessoas que querem organizar contas, antecipar faturas e planejar metas com tranquilidade.
 
 **Produção:** https://finflow-landing-umber.vercel.app/
 
-## O que este repositório contém
+## Experiência
 
-Landing independente em React 19, TypeScript, Vite e Tailwind CSS 4. Fontes Geist e Geist Mono hospedadas junto ao site. Ícones Lucide e fotografias editoriais Unsplash com tamanhos e compressão definidos.
+- Conteúdo sobre contas, cartões, orçamentos, metas e registro por mensagem.
+- Assistente apresentado por conversas: **Conecte seu agente de IA via CLI ou MCP**.
+- Demonstração de dashboard com períodos, cartões, despesa reversível e download CSV.
+- Prévia de próximas faturas, conversa Telegram e calculadora de metas.
+- Light e Dark Mode com paletas semânticas, preferência do sistema, alternância manual, persistência e retorno ao sistema.
+- Inicialização do tema no `<head>`, antes do React, para evitar troca de cores durante o carregamento. A preferência acompanha alterações do sistema e de outras abas; armazenamento bloqueado não impede o uso.
+- Geist hospedada localmente com licença OFL em `public/fonts/`, ícones Lucide e fotografia editorial Unsplash.
 
-- Dashboard local: períodos, transações, cartões, simulação reversível de despesa e download CSV.
-- Terminal com três comandos simulados.
-- Demonstrações de interação MCP e Telegram.
-- Calculadora de metas em centavos inteiros, com arredondamento para cima e tratamento de objetivo alcançado.
-- FAQ nativo acessível, menu mobile, foco visível e suporte a movimento reduzido.
+## Estado do produto e acesso
 
-## Estado do produto
+O produto permanece privado. A abertura está planejada, sem data anunciada. Este repositório contém somente a landing e suas demonstrações.
 
-O produto FinFlow permanece privado. Sua abertura está planejada, sem data anunciada. Este repositório público contém **apenas a landing**, não a API, o dashboard completo, a CLI ou o servidor MCP.
+Nenhuma conta bancária é acessada, nenhum pagamento é realizado e os valores da demonstração não são enviados a um servidor. Não há cadastro ou conta online nesta landing. Somente a preferência de tema é persistida no navegador, quando permitido. Exportações são criadas localmente.
 
-As demonstrações usam dados ilustrativos no navegador. Não há cadastro, conexão bancária, pagamento real ou envio de valores financeiros para um servidor. Dados do simulador não persistem entre sessões. Casos de uso são ilustrativos e não representam depoimentos de clientes. Fotografias são editoriais do Unsplash.
+`VITE_APP_URL` é opcional: configure uma URL verificada da aplicação para habilitar o destino de **Acessar minha conta**. Sem ela, o botão explica a disponibilidade e oferece a demonstração. A integração no app usa a rota existente `/`, que conserva seu controle de autenticação.
 
-As funcionalidades descritas do produto foram conferidas no README e no código do monorepo em 2 de novembro de 2026: centavos inteiros, exportação CSV/OFX, faturas e parcelamentos, metas, orçamentos, CLI, tools MCP `export_transactions`, `list_card_invoices` e `pay_invoice`. A integração real do Telegram depende da instalação e não é validada por este site. Não se anuncia integração Open Finance ou multi-tenancy sem evidência.
+As ferramentas de IA e o Telegram dependem de configuração na instalação do produto. A conversa apresentada aqui é ilustrativa. Não se anuncia conexão automática a bancos ou Open Finance.
 
-## Desenvolvimento
+## Desenvolvimento e validação
 
-Requisitos: Node 24 e pnpm 10.11.1.
+Node 24 e pnpm 10.11.1.
 
 ```sh
 pnpm install --frozen-lockfile
@@ -32,34 +34,44 @@ pnpm dev
 ```
 
 ```sh
+pnpm typecheck
 pnpm lint
 pnpm build
 pnpm test:e2e
 node scripts/verify-production.mjs
 ```
 
-Os testes usam Chromium com Playwright e axe. Na primeira instalação, se necessário, execute `pnpm exec playwright install chromium`. Os relatórios e screenshots ficam em `test-results/`, ignorado pelo Git.
+Os testes usam Chromium, Playwright e axe. Na primeira instalação, se necessário, execute `pnpm exec playwright install chromium`. Screenshots e relatórios são locais e ignorados pelo Git em `test-results/`. `node scripts/capture.mjs` gera referências de ambos os temas e a imagem de compartilhamento; `CAPTURE_URL` permite conferir outra instância sem regenerar o asset público.
+
+## Integração no app
+
+A fonte canônica é `src/components/landing/`. Ela não depende de APIs privadas ou de imports entre repositórios. A cópia no monorepo fica em `apps/web/src/components/landing/`, renderizada pela página `apps/web/src/pages/landing.tsx` em `/inicio`, fora da árvore autenticada.
+
+Para sincronizar os oito arquivos portáveis, a fonte e o bootstrap do tema com o monorepo irmão:
+
+```sh
+node scripts/sync-app.mjs
+```
+
+Para outra localização, defina `FINFLOW_WEB_DIR` com o caminho absoluto de `apps/web`. O script valida a existência da aplicação antes de escrever. A integração inicial também adiciona a rota, tokens semânticos em `styles.css` e seletores de tema no painel e login. Alterações futuras de conteúdo devem partir da fonte canônica.
 
 ## Publicação
 
-O projeto usa `vercel.json` para build Vite estático e cache de assets com hash. O repositório público e o projeto Vercel são dedicados à landing. Depois de autenticar o CLI:
+O projeto Vercel dedicado usa `vercel.json` e está conectado ao GitHub. A branch `main` publica a landing; o monorepo privado é separado.
 
 ```sh
 vercel link --project finflow-landing --yes
 vercel --prod --yes
 ```
 
-Não são necessárias variáveis de ambiente. Nenhuma credencial ou arquivo do produto privado deve ser incluído. O código-fonte é publicamente visível; uma licença de redistribuição ainda não foi definida.
+Não inclua credenciais ou arquivos da aplicação privada. O fonte desta landing é publicamente visível; uma licença de redistribuição do código ainda não foi definida. A fonte Geist mantém sua licença OFL.
 
-## Validação desta reconstrução
+## Decisões e evidências
 
-Em 2 de novembro de 2026, `pnpm lint` e `pnpm build` passaram. A suíte independente de Playwright passou em 13 de 13 cenários, incluindo layouts de 375, 768, 1024 e 1440 px, exportação CSV, demonstrações locais, cálculo de metas, teclado e movimento reduzido. A execução axe não encontrou violações críticas ou sérias. Os screenshots completos foram inspecionados e ficam em `test-results/screenshots/` após executar a suíte.
+Validação concluída em 2 de novembro de 2026: typecheck, build e lint passaram nos dois projetos. A landing passou em 9 testes de navegador; a suíte completa do frontend do monorepo passou em 44 testes, incluindo os 12 cenários novos de integração. O axe não encontrou violações WCAG 2.1 AA nos estados verificados de ambos os temas após as transições. Screenshots em 390 e 1440 px foram inspecionados. A revisão independente não encontrou defeitos materiais pendentes.
 
-A revisão independente de código foi concluída e a legenda da lista de transações na visualização de cartões foi corrigida. As decisões foram registradas aqui porque Semantica não está disponível nesta sessão.
+O reposicionamento prioriza a vida financeira cotidiana e preserva a IA como opção adicional. Os dois temas usam tokens de superfície, texto, borda, entrada, saída e alerta; o app migra consumidores para esses tokens, sem inverter a paleta zinc globalmente. Nenhuma biblioteca de temas foi adicionada.
 
-O histórico anterior foi preservado localmente em `../finflow-landing-before-redesign.bundle`. A exclusão remota foi recusada pelo GitHub por falta do escopo `delete_repo`; a reconstrução substitui a branch principal com um histórico novo no mesmo endereço público.
+O histórico anterior à primeira reconstrução permanece no backup local `../finflow-landing-before-redesign.bundle`. As alterações preexistentes do monorepo foram preservadas. Semantica está indisponível nesta sessão; as decisões ficam registradas neste README e na documentação do app.
 
-## Referências técnicas
-
-- [Tailwind CSS com Vite](https://tailwindcss.com/docs/installation/using-vite)
-- [Publicação com Vercel CLI](https://vercel.com/docs/cli/deploy)
+Referências: [Tailwind Dark Mode](https://tailwindcss.com/docs/dark-mode), [Vercel CLI](https://vercel.com/docs/cli/deploy).

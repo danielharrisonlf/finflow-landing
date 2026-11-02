@@ -1,0 +1,2592 @@
+@font-face {
+  font-family: FinFlowGeist;
+  src: url("/fonts/geist-latin.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+.finflow-landing {
+  background: var(--ff-bg);
+  color: var(--ff-text);
+  font-family: FinFlowGeist, system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  font-variant-numeric: tabular-nums;
+  -webkit-font-smoothing: antialiased;
+  overflow: clip;
+  min-width: 320px;
+  --ff-ease: cubic-bezier(0.32, 0.72, 0, 1);
+}
+.finflow-landing * {
+  box-sizing: border-box;
+}
+.finflow-landing fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+.finflow-landing h1,
+.finflow-landing h2,
+.finflow-landing h3,
+.finflow-landing h4,
+.finflow-landing p {
+  margin: 0;
+}
+.finflow-landing h1,
+.finflow-landing h2,
+.finflow-landing h3 {
+  font-weight: 500;
+  text-wrap: balance;
+}
+.finflow-landing a {
+  color: inherit;
+  text-decoration: none;
+}
+.finflow-landing button,
+.finflow-landing select,
+.finflow-landing input {
+  font: inherit;
+}
+.finflow-landing button {
+  cursor: pointer;
+  border: 0;
+  background: none;
+  color: inherit;
+}
+.finflow-landing a,
+.finflow-landing button {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    background 0.25s,
+    color 0.25s,
+    transform 0.3s var(--ff-ease);
+}
+.finflow-landing button:active,
+.finflow-landing .ff-button:active {
+  transform: translateY(1px);
+}
+.finflow-landing svg {
+  flex-shrink: 0;
+}
+.finflow-landing :focus-visible {
+  outline: 2px solid var(--ff-accent);
+  outline-offset: 4px;
+}
+.finflow-landing img {
+  max-width: 100%;
+  display: block;
+  object-fit: cover;
+}
+.finflow-landing p {
+  color: var(--ff-muted);
+  line-height: 1.8;
+}
+.finflow-landing section[id],
+.finflow-landing article[id],
+.finflow-landing #demonstracao {
+  scroll-margin-top: 110px;
+}
+.finflow-landing .ff-container {
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: 40px;
+  width: 100%;
+}
+.finflow-landing .ff-section {
+  padding-top: 120px;
+}
+.finflow-landing .ff-kicker {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.7px;
+  color: var(--ff-accent);
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 22px;
+}
+.finflow-landing h2 {
+  font-size: 45px;
+  line-height: 1.14;
+  letter-spacing: -1.8px;
+}
+.finflow-landing h3 {
+  font-size: 27px;
+  line-height: 1.25;
+  letter-spacing: -0.8px;
+}
+.finflow-landing .ff-button {
+  display: inline-flex;
+  min-height: 49px;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  padding: 14px 20px;
+  background: var(--ff-accent);
+  color: var(--ff-accent-text);
+  border: 1px solid transparent;
+  border-radius: 9px;
+  font-size: 13px;
+  font-weight: 550;
+  box-shadow: 0 3px 8px #176c470c;
+}
+.finflow-landing .ff-button:hover {
+  background: var(--ff-accent-hover);
+  transform: translateY(-2px);
+}
+.finflow-landing .ff-button > svg {
+  transition: transform 0.3s var(--ff-ease);
+}
+.finflow-landing .ff-button:hover > svg {
+  transform: translate(2px, -2px);
+}
+.finflow-landing .ff-text-link,
+.finflow-landing .ff-secondary-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ff-accent);
+}
+.finflow-landing .ff-secondary-link {
+  color: var(--ff-text);
+}
+.finflow-landing .ff-text-link:hover,
+.finflow-landing .ff-secondary-link:hover {
+  color: var(--ff-accent);
+}
+.finflow-landing .ff-fineprint {
+  font-size: 11px;
+  line-height: 1.8;
+  color: var(--ff-subtle);
+}
+.finflow-landing .ff-feature-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: var(--ff-tint);
+  color: var(--ff-accent);
+  flex-shrink: 0;
+}
+.finflow-landing .ff-status-dot {
+  height: 6px;
+  width: 6px;
+  border-radius: 50%;
+  background: var(--ff-accent);
+  display: inline-block;
+  flex-shrink: 0;
+}
+.finflow-landing .ff-skip-link {
+  position: fixed;
+  top: -100px;
+  left: 20px;
+  padding: 12px 20px;
+  background: var(--ff-accent);
+  color: var(--ff-accent-text);
+  z-index: 100;
+  border-radius: 7px;
+}
+.finflow-landing .ff-skip-link:focus {
+  top: 15px;
+}
+.finflow-landing .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+.finflow-landing .ff-brand {
+  font-size: 26px;
+  font-weight: 650;
+  letter-spacing: -1.3px;
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+  white-space: nowrap;
+}
+.finflow-landing .ff-brand > span:first-child {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: var(--ff-accent);
+  color: var(--ff-accent-text);
+  margin-right: 9px;
+}
+.finflow-landing .ff-brand-dot {
+  color: var(--ff-accent);
+}
+.finflow-landing .ff-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: var(--ff-bg);
+  border-bottom: 1px solid var(--ff-border);
+}
+.finflow-landing .ff-navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  min-height: 88px;
+}
+.finflow-landing .ff-nav-links {
+  display: flex;
+  gap: 25px;
+  align-items: center;
+  font-size: 12px;
+  color: var(--ff-muted);
+}
+.finflow-landing .ff-nav-links a:hover {
+  color: var(--ff-accent);
+}
+.finflow-landing .ff-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.finflow-landing .ff-account-link {
+  display: inline-flex;
+  gap: 9px;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.finflow-landing .ff-account-link:hover {
+  color: var(--ff-accent);
+}
+.ff-theme-control {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+}
+.ff-icon-button,
+.ff-system-button {
+  display: grid;
+  place-items: center;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--ff-muted);
+  width: 38px;
+  height: 38px;
+  cursor: pointer;
+  border-radius: 8px;
+}
+.ff-system-button {
+  width: 27px;
+  height: 32px;
+  color: var(--ff-subtle);
+}
+.ff-system-button[aria-pressed="true"] {
+  background: var(--ff-tint);
+  color: var(--ff-accent);
+}
+.ff-icon-button:hover,
+.ff-system-button:hover {
+  background: var(--ff-soft);
+  color: var(--ff-text);
+}
+.ff-icon-button:focus-visible,
+.ff-system-button:focus-visible {
+  outline: 2px solid var(--ff-accent);
+  outline-offset: 3px;
+}
+.finflow-landing .ff-menu-button {
+  display: none;
+}
+.finflow-landing .ff-mobile-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 8px 20px 20px;
+  border-top: 1px solid var(--ff-border);
+  background: var(--ff-surface);
+}
+.finflow-landing .ff-mobile-nav > a {
+  padding: 13px 6px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
+.finflow-landing .ff-mobile-nav .ff-account-link {
+  padding: 15px 6px;
+}
+.finflow-landing .ff-account-dialog {
+  border: 1px solid var(--ff-border);
+  background: var(--ff-surface);
+  color: var(--ff-text);
+  border-radius: 20px;
+  width: min(500px, calc(100% - 36px));
+  max-height: 90dvh;
+  padding: 35px;
+  box-shadow: var(--ff-shadow);
+}
+.finflow-landing .ff-account-dialog::backdrop {
+  background: #16231cb3;
+  backdrop-filter: blur(4px);
+}
+.finflow-landing .ff-account-dialog form {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+.finflow-landing .ff-account-dialog > .ff-feature-icon {
+  margin-bottom: 25px;
+}
+.finflow-landing .ff-account-dialog h2 {
+  font-size: 32px;
+  letter-spacing: -1px;
+}
+.finflow-landing .ff-account-dialog p {
+  font-size: 14px;
+  margin: 20px 0 26px;
+}
+.finflow-landing .ff-account-dialog .ff-button {
+  width: 100%;
+}
+.finflow-landing .ff-hero {
+  display: grid;
+  grid-template-columns: 0.88fr 1.12fr;
+  align-items: center;
+  gap: 52px;
+  padding-top: 74px;
+  padding-bottom: 70px;
+  position: relative;
+}
+.finflow-landing .ff-hero:before {
+  position: absolute;
+  content: "";
+  inset: 0 -120px -30px 45%;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 80% 30%, var(--ff-tint), transparent 75%);
+  z-index: 0;
+}
+.finflow-landing .ff-hero-copy,
+.finflow-landing .ff-hero-preview {
+  position: relative;
+  min-width: 0;
+}
+.finflow-landing .ff-hero h1 {
+  font-size: 53px;
+  line-height: 1.09;
+  letter-spacing: -2.15px;
+  font-weight: 500;
+}
+.finflow-landing .ff-hero-emphasis {
+  color: var(--ff-accent);
+}
+.finflow-landing .ff-hero-copy > p {
+  font-size: 14px;
+  max-width: 440px;
+  margin-top: 25px;
+}
+.finflow-landing .ff-hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-top: 29px;
+}
+.finflow-landing .ff-hero-copy > .ff-hero-microcopy {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  font-size: 10px;
+  color: var(--ff-subtle);
+  margin-top: 15px;
+}
+.finflow-landing .ff-hero-note {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin-top: 36px;
+  padding-top: 24px;
+  border-top: 1px solid var(--ff-border);
+  max-width: 270px;
+}
+.finflow-landing .ff-hero-note > span {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--ff-border);
+  border-radius: 50%;
+  color: var(--ff-accent);
+}
+.finflow-landing .ff-hero-note p {
+  font-size: 11px;
+  line-height: 1.65;
+}
+.finflow-landing .ff-hero-note strong {
+  font-weight: 450;
+  color: var(--ff-text);
+}
+.finflow-landing .ff-preview-label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 7px;
+  letter-spacing: 1px;
+  color: var(--ff-subtle);
+  margin-bottom: 13px;
+}
+.finflow-landing .ff-preview-label > span:last-child {
+  margin-left: auto;
+  letter-spacing: 0;
+  font-size: 9px;
+}
+.finflow-landing .ff-preview-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 8px;
+  color: var(--ff-subtle);
+  margin-top: 15px;
+}
+.finflow-landing .ff-promise-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--ff-border);
+  border-bottom: 1px solid var(--ff-border);
+  padding-block: 25px;
+  font-size: 12px;
+  color: var(--ff-muted);
+  max-width: 1200px;
+}
+.finflow-landing .ff-promise-strip > span {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.finflow-landing .ff-promise-strip svg {
+  color: var(--ff-accent);
+}
+.finflow-landing .dashboard-bezel {
+  padding: 6px;
+  border: 1px solid var(--ff-border);
+  border-radius: 17px;
+  background: var(--ff-soft);
+  box-shadow: var(--ff-shadow);
+}
+.finflow-landing .dashboard {
+  border: 1px solid var(--ff-border);
+  background: var(--ff-surface);
+  border-radius: 11px;
+  overflow: hidden;
+}
+.finflow-landing .app-sidebar {
+  display: none;
+}
+.finflow-landing .app-topbar {
+  min-height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid var(--ff-border);
+  padding: 0 18px;
+  font-size: 8px;
+}
+.finflow-landing .app-topbar > span:first-child {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.finflow-landing .breadcrumb {
+  color: var(--ff-subtle);
+}
+.finflow-landing .demo-tag {
+  font-size: 6px;
+  letter-spacing: 0.6px;
+  color: var(--ff-subtle);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.finflow-landing .demo-tag > span {
+  width: 4px;
+  height: 4px;
+  background: var(--ff-accent);
+  border-radius: 50%;
+}
+.finflow-landing .app-content {
+  padding: 20px 18px 13px;
+}
+.finflow-landing .app-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 13px;
+}
+.finflow-landing .app-greeting {
+  font-size: 8px;
+  color: var(--ff-subtle);
+}
+.finflow-landing .app-heading h3 {
+  font-size: 18px;
+  letter-spacing: -0.5px;
+  margin-top: 2px;
+  text-wrap: initial;
+}
+.finflow-landing .period-select {
+  border: 1px solid var(--ff-border);
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  padding-right: 7px;
+  border-radius: 5px;
+}
+.finflow-landing .period-select select {
+  appearance: none;
+  background: transparent;
+  color: var(--ff-muted);
+  border: 0;
+  padding: 6px 4px 6px 8px;
+  font-size: 8px;
+  cursor: pointer;
+}
+.finflow-landing option {
+  color: var(--ff-text);
+  background: var(--ff-surface);
+}
+.finflow-landing .mobile-dashboard-tabs {
+  display: flex;
+  gap: 20px;
+  font-size: 9px;
+  border-bottom: 1px solid var(--ff-border);
+  margin-bottom: 16px;
+  color: var(--ff-muted);
+}
+.finflow-landing .mobile-dashboard-tabs button {
+  padding: 7px 0;
+  border-bottom: 1px solid transparent;
+}
+.finflow-landing .mobile-dashboard-tabs button.active {
+  color: var(--ff-accent);
+  border-color: var(--ff-accent);
+}
+.finflow-landing .metric-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr 1fr;
+  gap: 9px;
+  margin-bottom: 15px;
+}
+.finflow-landing .metric {
+  padding: 12px 10px;
+  border: 1px solid var(--ff-border);
+  border-radius: 7px;
+  min-width: 0;
+}
+.finflow-landing .metric > span {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  font-size: 8px;
+  color: var(--ff-muted);
+}
+.finflow-landing .metric > strong {
+  font-size: 21px;
+  font-weight: 500;
+  letter-spacing: -0.7px;
+  display: block;
+  margin: 10px 0 8px;
+  white-space: nowrap;
+}
+.finflow-landing .metric small {
+  font-size: 7px;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  color: var(--ff-subtle);
+}
+.finflow-landing .metric:first-child small {
+  color: var(--ff-income);
+}
+.finflow-landing .metric small > span {
+  display: none;
+}
+.finflow-landing .ff-income {
+  color: var(--ff-income);
+}
+.finflow-landing .ff-expense {
+  color: var(--ff-expense);
+}
+.finflow-landing .ff-warning {
+  color: var(--ff-warning);
+}
+.finflow-landing .ff-danger {
+  color: var(--ff-danger);
+}
+.finflow-landing .dashboard-middle {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+.finflow-landing .cashflow,
+.finflow-landing .budget-panel {
+  min-width: 0;
+  border: 1px solid var(--ff-border);
+  border-radius: 7px;
+  padding: 12px;
+}
+.finflow-landing .panel-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.finflow-landing .panel-heading h4 {
+  font-size: 9px;
+  font-weight: 500;
+}
+.finflow-landing .panel-heading > span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--ff-subtle);
+  font-size: 6px;
+}
+.finflow-landing .panel-heading i {
+  width: 4px;
+  height: 4px;
+  background: var(--ff-income);
+  border-radius: 50%;
+  margin-left: 3px;
+}
+.finflow-landing .panel-heading i.expense-dot {
+  background: var(--ff-expense);
+}
+.finflow-landing .chart {
+  height: 125px;
+  position: relative;
+  margin-top: 20px;
+  padding-left: 22px;
+  padding-bottom: 12px;
+}
+.finflow-landing .chart svg {
+  height: 100%;
+  width: 100%;
+  overflow: visible;
+}
+.finflow-landing .chart-labels {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: var(--ff-subtle);
+  font-size: 6px;
+}
+.finflow-landing .chart-months {
+  display: flex;
+  justify-content: space-between;
+  gap: 3px;
+  font-size: 5px;
+  color: var(--ff-subtle);
+  margin-top: 6px;
+}
+.finflow-landing .budget {
+  margin-top: 16px;
+}
+.finflow-landing .budget > div:first-child {
+  display: flex;
+  justify-content: space-between;
+  color: var(--ff-muted);
+  font-size: 7px;
+}
+.finflow-landing .progress,
+.finflow-landing .ff-progress {
+  height: 5px;
+  border-radius: 99px;
+  background: var(--ff-raised);
+  overflow: hidden;
+}
+.finflow-landing .progress > span,
+.finflow-landing .ff-progress > span {
+  display: block;
+  height: 100%;
+  border-radius: 99px;
+  background: var(--ff-income);
+  transition: width 0.4s var(--ff-ease);
+}
+.finflow-landing .progress > span.amber,
+.finflow-landing .ff-progress > .ff-warning-bg {
+  background: var(--ff-warning);
+}
+.finflow-landing .progress > span.violet {
+  background: var(--ff-income);
+}
+.finflow-landing .ff-progress > .ff-danger-bg {
+  background: var(--ff-danger);
+}
+.finflow-landing .budget .progress {
+  margin: 7px 0;
+}
+.finflow-landing .budget > small {
+  font-size: 6px;
+  color: var(--ff-text);
+}
+.finflow-landing .budget small > span {
+  color: var(--ff-subtle);
+}
+.finflow-landing .transactions {
+  padding: 12px 12px 0;
+  border: 1px solid var(--ff-border);
+  border-radius: 7px;
+}
+.finflow-landing .panel-heading > button {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 7px;
+  color: var(--ff-muted);
+}
+.finflow-landing .transaction {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 43px;
+  border-bottom: 1px solid var(--ff-border);
+}
+.finflow-landing .transaction:last-child {
+  border: 0;
+}
+.finflow-landing .transaction-icon {
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+  display: grid;
+  place-items: center;
+  background: var(--ff-soft);
+  color: var(--ff-muted);
+  flex-shrink: 0;
+}
+.finflow-landing .transaction-icon.green {
+  background: var(--ff-tint);
+  color: var(--ff-income);
+}
+.finflow-landing .transaction-icon.rose {
+  color: var(--ff-expense);
+}
+.finflow-landing .transaction > div {
+  display: grid;
+  gap: 2px;
+}
+.finflow-landing .transaction strong {
+  font-size: 8px;
+  font-weight: 500;
+}
+.finflow-landing .transaction small {
+  font-size: 6px;
+  color: var(--ff-subtle);
+}
+.finflow-landing .transaction-date {
+  font-size: 7px;
+  color: var(--ff-subtle);
+  margin-left: auto;
+  margin-right: 12px;
+}
+.finflow-landing .transaction > strong {
+  font-size: 9px;
+  min-width: 75px;
+  text-align: right;
+}
+.finflow-landing .demo-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 7px;
+  font-size: 7px;
+  padding-top: 12px;
+  color: var(--ff-subtle);
+}
+.finflow-landing .demo-controls > span,
+.finflow-landing .demo-controls > button {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.finflow-landing .demo-controls button {
+  font-size: 8px;
+  color: var(--ff-accent);
+  padding: 4px 0;
+}
+.finflow-landing .invoice-view {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  min-height: 190px;
+  margin-bottom: 15px;
+}
+.finflow-landing .credit-card {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  padding: 18px;
+  background: var(--ff-tint);
+  border: 1px solid var(--ff-border);
+  border-radius: 10px;
+}
+.finflow-landing .credit-card > span {
+  font-size: 11px;
+  font-weight: 500;
+}
+.finflow-landing .credit-card > small {
+  font-size: 8px;
+  color: var(--ff-muted);
+}
+.finflow-landing .credit-card > strong {
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: -0.5px;
+}
+.finflow-landing .ff-section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 70px;
+  margin-bottom: 43px;
+}
+.finflow-landing .ff-section-heading > p {
+  max-width: 315px;
+  font-size: 14px;
+  padding-bottom: 4px;
+}
+.finflow-landing .ff-features-grid {
+  display: grid;
+  grid-template-columns: 1.16fr 1fr;
+  gap: 22px;
+}
+.finflow-landing .ff-feature-card {
+  background: var(--ff-surface);
+  border: 1px solid var(--ff-border);
+  border-radius: 20px;
+  overflow: hidden;
+  min-width: 0;
+}
+.finflow-landing .ff-feature-copy {
+  padding: 30px 32px;
+}
+.finflow-landing .ff-feature-copy > .ff-feature-icon {
+  margin-bottom: 22px;
+}
+.finflow-landing .ff-feature-copy p {
+  font-size: 14px;
+  margin-top: 15px;
+  max-width: 370px;
+}
+.finflow-landing .ff-card-preview {
+  position: relative;
+  padding: 15px 32px 32px;
+  min-height: 265px;
+}
+.finflow-landing .ff-physical-card {
+  position: absolute;
+  left: 32px;
+  bottom: 55px;
+  width: 240px;
+  min-height: 170px;
+  border-radius: 15px;
+  background: linear-gradient(130deg, #496c55, #244732);
+  padding: 23px;
+  color: #fff;
+  transform: rotate(-8deg);
+  box-shadow: 0 15px 35px #24473224;
+}
+.finflow-landing .ff-physical-card > span {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11px;
+}
+.finflow-landing .ff-physical-card > span:last-child {
+  margin-top: 15px;
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+.finflow-landing .ff-physical-card > span > span {
+  font-size: 10px;
+  letter-spacing: 0;
+  opacity: 0.9;
+}
+.finflow-landing .ff-card-chip {
+  width: 29px;
+  height: 23px;
+  border: 1px solid #d7e2d7;
+  border-radius: 5px;
+  margin-top: 20px;
+  background: linear-gradient(140deg, #d1d9bb66, #bdccba22);
+}
+.finflow-landing .ff-invoice {
+  position: relative;
+  z-index: 1;
+  margin-left: 42%;
+  background: var(--ff-surface);
+  border: 1px solid var(--ff-border);
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow: 0 8px 30px #243d2d09;
+  min-width: 220px;
+}
+.finflow-landing .ff-invoice > div:first-child {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  font-size: 10px;
+  color: var(--ff-muted);
+}
+.finflow-landing .ff-badge {
+  font-size: 8px;
+  border: 1px solid var(--ff-border);
+  padding: 4px 7px;
+  border-radius: 99px;
+  color: var(--ff-muted);
+  white-space: nowrap;
+}
+.finflow-landing .ff-invoice > strong {
+  font-size: 31px;
+  font-weight: 450;
+  letter-spacing: -1px;
+  display: block;
+  margin: 15px 0 18px;
+}
+.finflow-landing .ff-invoice-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 9px;
+  color: var(--ff-muted);
+  margin-bottom: 8px;
+}
+.finflow-landing .ff-invoice > button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  border-top: 1px solid var(--ff-border);
+  padding: 13px 0 0;
+  font-size: 10px;
+  color: var(--ff-accent);
+  margin-top: 15px;
+}
+.finflow-landing .ff-budget-preview {
+  padding: 0 32px 33px;
+}
+.finflow-landing .ff-budget-preview > div {
+  margin-top: 23px;
+}
+.finflow-landing .ff-budget-preview > div > div:first-child {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  font-size: 12px;
+}
+.finflow-landing .ff-budget-preview strong {
+  font-weight: 500;
+}
+.finflow-landing .ff-budget-preview > div > div:first-child > span {
+  font-size: 10px;
+  color: var(--ff-muted);
+}
+.finflow-landing .ff-budget-preview .ff-progress {
+  margin: 11px 0 8px;
+  height: 6px;
+}
+.finflow-landing .ff-budget-preview > div > span {
+  font-size: 10px;
+}
+.finflow-landing .ff-message-feature {
+  grid-column: span 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 50px;
+  background: var(--ff-soft);
+  padding: 12px 18px;
+}
+.finflow-landing .ff-message-feature .ff-feature-copy p {
+  max-width: 320px;
+}
+.finflow-landing .ff-message-feature .ff-fineprint {
+  display: block;
+  margin-top: 19px;
+  font-size: 10px;
+}
+.finflow-landing .ff-telegram {
+  max-width: 440px;
+  width: 100%;
+  border: 1px solid var(--ff-border);
+  border-radius: 15px;
+  background: var(--ff-surface);
+  padding: 20px;
+  margin-block: 20px;
+}
+.finflow-landing .ff-chat-heading {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin-bottom: 22px;
+}
+.finflow-landing .ff-chat-heading .ff-feature-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+}
+.finflow-landing .ff-chat-heading strong {
+  font-size: 12px;
+  font-weight: 550;
+  display: block;
+}
+.finflow-landing .ff-chat-heading small {
+  font-size: 10px;
+  color: var(--ff-subtle);
+  display: block;
+  margin-top: 2px;
+}
+.finflow-landing .ff-chat-heading > .ff-badge {
+  margin-left: auto;
+}
+.finflow-landing .ff-chat-message {
+  padding: 13px 15px;
+  font-size: 12px;
+  border-radius: 12px;
+  max-width: 86%;
+  line-height: 1.7;
+}
+.finflow-landing .ff-chat-outgoing {
+  margin-left: auto;
+  background: var(--ff-tint);
+  border: 1px solid var(--ff-border);
+  border-bottom-right-radius: 3px;
+}
+.finflow-landing .ff-chat-message > small {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 5px;
+  font-size: 8px;
+  color: var(--ff-subtle);
+  margin-top: 5px;
+}
+.finflow-landing .ff-chat-incoming {
+  background: var(--ff-soft);
+  margin-top: 13px;
+  border-bottom-left-radius: 3px;
+}
+.finflow-landing .ff-chat-incoming > span {
+  font-size: 11px;
+  color: var(--ff-accent);
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+.finflow-landing .ff-chat-incoming > strong {
+  font-size: 23px;
+  letter-spacing: -0.6px;
+  font-weight: 500;
+  display: block;
+  margin-top: 8px;
+}
+.finflow-landing .ff-chat-incoming > small {
+  justify-content: flex-start;
+}
+.finflow-landing .ff-chat-input {
+  border: 1px solid var(--ff-border);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 17px;
+  padding: 13px;
+  color: var(--ff-accent);
+  font-size: 11px;
+  background: var(--ff-surface);
+}
+.finflow-landing .ff-goals {
+  display: grid;
+  grid-template-columns: 1fr 0.9fr;
+  gap: 100px;
+  align-items: center;
+}
+.finflow-landing .ff-goal-story > p {
+  font-size: 14px;
+  max-width: 400px;
+  margin-top: 22px;
+}
+.finflow-landing .ff-goal-photo {
+  position: relative;
+  margin-top: 30px;
+  border-radius: 15px;
+  overflow: hidden;
+  height: 220px;
+  max-width: 470px;
+}
+.finflow-landing .ff-goal-photo > img {
+  width: 100%;
+  height: 100%;
+  filter: saturate(0.6) brightness(0.8);
+}
+.finflow-landing .ff-goal-photo:after {
+  position: absolute;
+  content: "";
+  inset: 0;
+  background: linear-gradient(transparent 25%, #193125a8);
+}
+.finflow-landing .ff-goal-photo > span {
+  position: absolute;
+  z-index: 1;
+  left: 24px;
+  bottom: 23px;
+  color: #fff;
+  font-size: 10px;
+  line-height: 1.8;
+}
+.finflow-landing .ff-goal-photo > span > svg {
+  display: block;
+  margin-bottom: 8px;
+}
+.finflow-landing .ff-goal-photo strong {
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: -0.2px;
+}
+.finflow-landing .ff-calculator {
+  background: var(--ff-surface);
+  border: 1px solid var(--ff-border);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: var(--ff-shadow);
+  min-width: 0;
+}
+.finflow-landing .ff-calculator-title {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 32px;
+}
+.finflow-landing .ff-calculator-title h3 {
+  font-size: 15px;
+  letter-spacing: -0.3px;
+  line-height: 1.5;
+}
+.finflow-landing .ff-calculator-title p {
+  font-size: 11px;
+}
+.finflow-landing .ff-range-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 12px;
+  color: var(--ff-muted);
+  margin: 24px 0 18px;
+}
+.finflow-landing .ff-range-label strong {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--ff-text);
+  letter-spacing: -0.4px;
+}
+.finflow-landing .ff-calculator input[type="range"] {
+  accent-color: var(--ff-accent);
+  height: 5px;
+  width: 100%;
+  margin: 0;
+  display: block;
+  cursor: pointer;
+}
+.finflow-landing .ff-range-limits {
+  display: flex;
+  justify-content: space-between;
+  font-size: 9px;
+  color: var(--ff-subtle);
+  margin-top: 13px;
+}
+.finflow-landing .ff-months {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--ff-muted);
+  margin-top: 25px;
+}
+.finflow-landing .ff-months > div {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  padding-right: 12px;
+  border: 1px solid var(--ff-border);
+  border-radius: 7px;
+}
+.finflow-landing .ff-months select {
+  appearance: none;
+  padding: 9px 10px;
+  color: var(--ff-text);
+  background: transparent;
+  border: 0;
+  font-size: 12px;
+  cursor: pointer;
+}
+.finflow-landing .ff-calculator-result {
+  background: var(--ff-tint);
+  border: 1px solid var(--ff-border);
+  border-radius: 12px;
+  padding: 21px;
+  margin-top: 24px;
+}
+.finflow-landing .ff-calculator-result > span {
+  font-size: 11px;
+  color: var(--ff-muted);
+}
+.finflow-landing .ff-calculator-result > strong {
+  display: block;
+  font-size: 37px;
+  font-weight: 500;
+  letter-spacing: -1.3px;
+  color: var(--ff-accent);
+  margin: 8px 0 18px;
+}
+.finflow-landing .ff-calculator-result strong > small {
+  font-size: 11px;
+  color: var(--ff-muted);
+  font-weight: 400;
+  letter-spacing: 0;
+  margin-left: 8px;
+}
+.finflow-landing .ff-calculator-result > div:last-child {
+  display: flex;
+  justify-content: space-between;
+  color: var(--ff-muted);
+  font-size: 9px;
+  margin-top: 11px;
+}
+.finflow-landing .ff-calculator > .ff-text-link {
+  margin-top: 22px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+}
+.finflow-landing .ff-calculator > .ff-fineprint {
+  font-size: 9px;
+  margin-top: 16px;
+}
+.finflow-landing .ff-ai-panel {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 65px;
+  align-items: center;
+  background: var(--ff-tint);
+  border: 1px solid var(--ff-border);
+  border-radius: 24px;
+  padding: 48px;
+}
+.finflow-landing .ff-ai-copy h2 {
+  font-size: 39px;
+  line-height: 1.18;
+  letter-spacing: -1.5px;
+}
+.finflow-landing .ff-ai-copy > p {
+  font-size: 14px;
+  margin-top: 22px;
+}
+.finflow-landing .ff-ai-copy > .ff-kicker {
+  font-size: 8px;
+  letter-spacing: 1px;
+}
+.finflow-landing .ff-ai-benefit {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 11px;
+  margin-top: 18px;
+}
+.finflow-landing .ff-ai-benefit svg {
+  color: var(--ff-accent);
+}
+.finflow-landing .ff-ai-copy > .ff-fineprint {
+  font-size: 10px;
+  margin-top: 25px;
+  max-width: 360px;
+}
+.finflow-landing .ff-ai-chat {
+  background: var(--ff-surface);
+  border: 1px solid var(--ff-border);
+  border-radius: 17px;
+  padding: 23px;
+  box-shadow: var(--ff-shadow);
+  min-width: 0;
+}
+.finflow-landing .ff-ai-chat .ff-chat-heading {
+  gap: 9px;
+  margin-bottom: 21px;
+}
+.finflow-landing .ff-ai-chat .ff-chat-heading strong {
+  font-size: 11px;
+}
+.finflow-landing .ff-ai-chat .ff-chat-heading small {
+  font-size: 8px;
+}
+.finflow-landing .ff-ai-chat .ff-badge {
+  font-size: 7px;
+}
+.finflow-landing .ff-prompt-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 22px;
+}
+.finflow-landing .ff-prompt-options button {
+  font-size: 9px;
+  color: var(--ff-muted);
+  border: 1px solid var(--ff-border);
+  border-radius: 99px;
+  padding: 7px 9px;
+  text-align: left;
+}
+.finflow-landing .ff-prompt-options button[aria-pressed="true"] {
+  background: var(--ff-tint);
+  color: var(--ff-accent);
+  border-color: var(--ff-accent);
+}
+.finflow-landing .ff-ai-answer {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 23px;
+  min-height: 155px;
+}
+.finflow-landing .ff-ai-answer-icon {
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--ff-accent);
+  flex-shrink: 0;
+}
+.finflow-landing .ff-ai-answer p {
+  font-size: 12px;
+  line-height: 1.9;
+}
+.finflow-landing .ff-ai-answer-result {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px;
+  background: var(--ff-tint);
+  border-radius: 6px;
+  font-size: 9px;
+  color: var(--ff-accent);
+  margin-top: 16px;
+}
+.finflow-landing .ff-ai-chat-footer {
+  border-top: 1px solid var(--ff-border);
+  padding-top: 17px;
+  margin-top: 20px;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  font-size: 9px;
+  color: var(--ff-subtle);
+}
+.finflow-landing .ff-privacy {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 100px;
+  align-items: center;
+}
+.finflow-landing .ff-privacy-heading > p {
+  font-size: 14px;
+  max-width: 360px;
+  margin-top: 22px;
+}
+.finflow-landing .ff-privacy-heading > .ff-text-link {
+  font-size: 12px;
+  margin-top: 29px;
+}
+.finflow-landing .ff-privacy-features {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+.finflow-landing .ff-privacy-features article {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  padding-bottom: 25px;
+  border-bottom: 1px solid var(--ff-border);
+}
+.finflow-landing .ff-privacy-features article:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+.finflow-landing .ff-privacy-features h3 {
+  font-size: 17px;
+  letter-spacing: -0.3px;
+  line-height: 1.5;
+}
+.finflow-landing .ff-privacy-features p {
+  font-size: 12px;
+  margin-top: 8px;
+}
+.finflow-landing .ff-faq {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 100px;
+  padding-bottom: 120px;
+}
+.finflow-landing .ff-faq details {
+  border-bottom: 1px solid var(--ff-border);
+}
+.finflow-landing .ff-faq details:first-child {
+  border-top: 1px solid var(--ff-border);
+}
+.finflow-landing .ff-faq summary {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  justify-content: space-between;
+  padding: 21px 0;
+  list-style: none;
+  font-size: 13px;
+  cursor: pointer;
+}
+.finflow-landing .ff-faq summary::-webkit-details-marker {
+  display: none;
+}
+.finflow-landing .ff-faq summary > svg {
+  transition: transform 0.3s var(--ff-ease);
+  color: var(--ff-subtle);
+}
+.finflow-landing .ff-faq details[open] summary > svg {
+  transform: rotate(45deg);
+  color: var(--ff-accent);
+}
+.finflow-landing .ff-faq details > p {
+  font-size: 12px;
+  padding: 0 20px 23px 0;
+}
+.finflow-landing .ff-final {
+  max-width: 1200px;
+  width: calc(100% - 80px);
+  padding: 57px 30px 50px;
+  text-align: center;
+  background: var(--ff-tint);
+  border: 1px solid var(--ff-border);
+  border-radius: 22px;
+}
+.finflow-landing .ff-final-icon {
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--ff-border);
+  background: var(--ff-surface);
+  color: var(--ff-accent);
+  width: 59px;
+  height: 59px;
+  border-radius: 17px;
+  margin: 0 auto 26px;
+}
+.finflow-landing .ff-final h2 {
+  font-size: 45px;
+  letter-spacing: -1.7px;
+  line-height: 1.15;
+}
+.finflow-landing .ff-final h2 > span {
+  color: var(--ff-accent);
+}
+.finflow-landing .ff-final > p {
+  font-size: 13px;
+  margin-top: 19px;
+}
+.finflow-landing .ff-final > .ff-button {
+  margin-top: 26px;
+}
+.finflow-landing .ff-final > small {
+  display: block;
+  font-size: 10px;
+  color: var(--ff-subtle);
+  margin-top: 15px;
+}
+.finflow-landing .ff-footer {
+  padding-top: 65px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: start;
+  gap: 40px;
+}
+.finflow-landing .ff-footer > div > p {
+  font-size: 12px;
+  margin-top: 17px;
+}
+.finflow-landing .ff-footer-links {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  font-size: 11px;
+  color: var(--ff-muted);
+  padding-top: 8px;
+}
+.finflow-landing .ff-footer-links a:hover {
+  color: var(--ff-accent);
+}
+.finflow-landing .ff-footer-bottom {
+  grid-column: span 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  border-top: 1px solid var(--ff-border);
+  padding: 24px 0;
+  font-size: 9px;
+  color: var(--ff-subtle);
+}
+.finflow-landing .ff-footer-bottom > a {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .finflow-landing .ff-hero-copy {
+    animation: ff-enter 0.8s var(--ff-ease) both;
+  }
+  .finflow-landing .ff-hero-preview {
+    animation: ff-enter 1s 0.1s var(--ff-ease) both;
+  }
+  .finflow-landing
+    :where(
+      p,
+      h1,
+      h2,
+      h3,
+      h4,
+      button,
+      a,
+      article,
+      .dashboard,
+      .metric,
+      .ff-calculator,
+      .ff-ai-chat,
+      .ff-header
+    ) {
+    transition-property: background-color, color, border-color, box-shadow, transform;
+    transition-duration: 0.25s;
+  }
+  .finflow-landing .ff-ai-answer {
+    animation: ff-enter 0.4s var(--ff-ease) both;
+  }
+}
+@keyframes ff-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@media (min-width: 1600px) {
+  .finflow-landing .ff-container {
+    max-width: 1400px;
+    padding-inline: 55px;
+  }
+  .finflow-landing .ff-hero {
+    gap: 70px;
+    padding-top: 100px;
+    padding-bottom: 90px;
+  }
+  .finflow-landing .ff-hero h1 {
+    font-size: 60px;
+  }
+  .finflow-landing .ff-hero-copy > p {
+    font-size: 16px;
+  }
+  .finflow-landing .ff-final {
+    max-width: 1290px;
+  }
+  .finflow-landing .metric > strong {
+    font-size: 24px;
+  }
+}
+@media (max-width: 1150px) {
+  .finflow-landing .ff-navbar {
+    gap: 20px;
+  }
+  .finflow-landing .ff-nav-links {
+    gap: 17px;
+    font-size: 10px;
+  }
+  .finflow-landing .ff-nav-actions {
+    gap: 12px;
+  }
+  .finflow-landing .ff-hero {
+    gap: 30px;
+    grid-template-columns: 0.9fr 1.1fr;
+    padding-top: 60px;
+  }
+  .finflow-landing .ff-hero h1 {
+    font-size: 45px;
+    letter-spacing: -1.7px;
+  }
+  .finflow-landing .ff-hero-copy > p {
+    font-size: 13px;
+  }
+  .finflow-landing .ff-hero-actions {
+    gap: 16px;
+  }
+  .finflow-landing .ff-button,
+  .finflow-landing .ff-secondary-link {
+    font-size: 11px;
+  }
+  .finflow-landing .ff-preview-label {
+    font-size: 6px;
+    letter-spacing: 0.5px;
+  }
+  .finflow-landing .ff-preview-label > span:last-child {
+    display: none;
+  }
+  .finflow-landing .metric {
+    padding: 11px 8px;
+  }
+  .finflow-landing .metric > strong {
+    font-size: 18px;
+  }
+  .finflow-landing .dashboard-middle {
+    grid-template-columns: 1fr;
+  }
+  .finflow-landing .budget-panel {
+    display: none;
+  }
+  .finflow-landing .chart {
+    height: 135px;
+  }
+  .finflow-landing .ff-section-heading {
+    gap: 45px;
+  }
+  .finflow-landing .ff-section-heading h2 {
+    font-size: 40px;
+  }
+  .finflow-landing .ff-feature-copy {
+    padding: 28px;
+  }
+  .finflow-landing .ff-card-preview {
+    padding-inline: 25px;
+  }
+  .finflow-landing .ff-invoice {
+    min-width: 185px;
+    margin-left: 38%;
+    padding: 15px;
+  }
+  .finflow-landing .ff-invoice > strong {
+    font-size: 28px;
+  }
+  .finflow-landing .ff-physical-card {
+    left: 25px;
+    width: 215px;
+  }
+  .finflow-landing .ff-message-feature {
+    gap: 30px;
+  }
+  .finflow-landing .ff-goals,
+  .finflow-landing .ff-privacy,
+  .finflow-landing .ff-faq {
+    gap: 60px;
+  }
+  .finflow-landing h2 {
+    font-size: 39px;
+  }
+  .finflow-landing .ff-ai-panel {
+    padding: 35px;
+    gap: 35px;
+  }
+  .finflow-landing .ff-ai-copy h2 {
+    font-size: 34px;
+  }
+  .finflow-landing .ff-ai-chat {
+    padding: 19px;
+  }
+  .finflow-landing .ff-ai-chat .ff-badge {
+    display: none;
+  }
+  .finflow-landing .ff-calculator {
+    padding: 25px;
+  }
+  .finflow-landing .ff-footer-links {
+    gap: 17px;
+  }
+}
+@media (max-width: 900px) {
+  .finflow-landing .ff-container {
+    padding-inline: 28px;
+  }
+  .finflow-landing .ff-navbar {
+    min-height: 76px;
+  }
+  .finflow-landing .ff-nav-links {
+    display: none;
+  }
+  .finflow-landing .ff-nav-actions {
+    margin-left: auto;
+    gap: 15px;
+  }
+  .finflow-landing .ff-menu-button {
+    display: grid;
+  }
+  .finflow-landing .ff-hero {
+    grid-template-columns: 1fr;
+    gap: 43px;
+    padding-top: 54px;
+    padding-bottom: 42px;
+    max-width: 740px;
+  }
+  .finflow-landing .ff-hero-copy {
+    text-align: center;
+  }
+  .finflow-landing .ff-hero-copy > .ff-kicker {
+    justify-content: center;
+  }
+  .finflow-landing .ff-hero h1 {
+    font-size: 50px;
+    max-width: 640px;
+    margin: auto;
+    letter-spacing: -1.9px;
+  }
+  .finflow-landing .ff-hero-copy > p {
+    font-size: 15px;
+    max-width: 560px;
+    margin: 23px auto 0;
+  }
+  .finflow-landing .ff-hero-actions {
+    justify-content: center;
+    gap: 23px;
+  }
+  .finflow-landing .ff-button {
+    font-size: 13px;
+  }
+  .finflow-landing .ff-secondary-link {
+    font-size: 13px;
+  }
+  .finflow-landing .ff-hero-copy > .ff-hero-microcopy {
+    justify-content: center;
+    font-size: 10px;
+  }
+  .finflow-landing .ff-hero-note {
+    display: none;
+  }
+  .finflow-landing .ff-hero:before {
+    inset: 40% -100px 0;
+  }
+  .finflow-landing .ff-preview-label {
+    font-size: 7px;
+  }
+  .finflow-landing .ff-preview-label > span:last-child {
+    display: inline;
+    font-size: 9px;
+  }
+  .finflow-landing .dashboard-middle {
+    grid-template-columns: 1.35fr 1fr;
+  }
+  .finflow-landing .budget-panel {
+    display: block;
+  }
+  .finflow-landing .metric > strong {
+    font-size: 23px;
+  }
+  .finflow-landing .app-content {
+    padding: 22px;
+  }
+  .finflow-landing .ff-promise-strip {
+    max-width: calc(100% - 56px);
+    font-size: 10px;
+    padding-inline: 0;
+    padding-block: 23px;
+    gap: 15px;
+  }
+  .finflow-landing .ff-section {
+    padding-top: 90px;
+  }
+  .finflow-landing .ff-section-heading {
+    display: block;
+    margin-bottom: 32px;
+  }
+  .finflow-landing .ff-section-heading > p {
+    max-width: 450px;
+    margin-top: 20px;
+    font-size: 14px;
+  }
+  .finflow-landing .ff-section-heading h2 {
+    font-size: 41px;
+  }
+  .finflow-landing .ff-features-grid {
+    gap: 16px;
+    grid-template-columns: 1fr 1fr;
+  }
+  .finflow-landing .ff-feature-copy {
+    padding: 25px;
+  }
+  .finflow-landing .ff-feature-copy h3 {
+    font-size: 25px;
+  }
+  .finflow-landing .ff-feature-copy p {
+    font-size: 13px;
+  }
+  .finflow-landing .ff-card-preview {
+    padding: 10px 22px 25px;
+    min-height: 275px;
+  }
+  .finflow-landing .ff-physical-card {
+    left: 22px;
+    bottom: 115px;
+    width: 200px;
+    min-height: 150px;
+    padding: 20px;
+  }
+  .finflow-landing .ff-invoice {
+    margin-left: 16%;
+    margin-top: 55px;
+    min-width: 0;
+    padding: 15px;
+  }
+  .finflow-landing .ff-invoice > strong {
+    font-size: 28px;
+  }
+  .finflow-landing .ff-budget-preview {
+    padding: 0 25px 27px;
+  }
+  .finflow-landing .ff-budget-preview > div > div:first-child {
+    font-size: 11px;
+    gap: 10px;
+  }
+  .finflow-landing .ff-budget-preview > div > div:first-child > span {
+    font-size: 9px;
+  }
+  .finflow-landing .ff-budgets-feature {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .finflow-landing .ff-message-feature {
+    padding: 4px;
+    gap: 15px;
+  }
+  .finflow-landing .ff-telegram {
+    padding: 17px;
+    margin-right: 18px;
+    width: auto;
+  }
+  .finflow-landing .ff-chat-heading strong {
+    font-size: 10px;
+  }
+  .finflow-landing .ff-chat-heading small {
+    font-size: 8px;
+  }
+  .finflow-landing .ff-chat-message {
+    font-size: 11px;
+    max-width: 95%;
+  }
+  .finflow-landing .ff-goals {
+    gap: 35px;
+    grid-template-columns: 1fr 1fr;
+  }
+  .finflow-landing .ff-goal-story h2 {
+    font-size: 36px;
+  }
+  .finflow-landing .ff-goal-story > p {
+    font-size: 13px;
+  }
+  .finflow-landing .ff-goal-photo {
+    height: 210px;
+  }
+  .finflow-landing .ff-goal-photo > span {
+    left: 18px;
+    bottom: 18px;
+  }
+  .finflow-landing .ff-goal-photo strong {
+    font-size: 13px;
+  }
+  .finflow-landing .ff-calculator {
+    padding: 23px;
+  }
+  .finflow-landing .ff-calculator-title {
+    gap: 9px;
+  }
+  .finflow-landing .ff-calculator-title h3 {
+    font-size: 12px;
+  }
+  .finflow-landing .ff-calculator-title p {
+    font-size: 9px;
+  }
+  .finflow-landing .ff-range-label {
+    font-size: 10px;
+  }
+  .finflow-landing .ff-range-label strong {
+    font-size: 15px;
+  }
+  .finflow-landing .ff-calculator-result {
+    padding: 17px;
+  }
+  .finflow-landing .ff-calculator-result > strong {
+    font-size: 30px;
+  }
+  .finflow-landing .ff-calculator-result > div:last-child {
+    font-size: 8px;
+  }
+  .finflow-landing .ff-ai-panel {
+    gap: 35px;
+    padding: 30px;
+    grid-template-columns: 1fr;
+  }
+  .finflow-landing .ff-ai-copy h2 {
+    font-size: 39px;
+    max-width: 520px;
+  }
+  .finflow-landing .ff-ai-copy > p {
+    max-width: 570px;
+    font-size: 14px;
+  }
+  .finflow-landing .ff-ai-copy > .ff-fineprint {
+    max-width: 570px;
+  }
+  .finflow-landing .ff-ai-chat {
+    padding: 25px;
+  }
+  .finflow-landing .ff-ai-chat .ff-chat-heading strong {
+    font-size: 13px;
+  }
+  .finflow-landing .ff-ai-chat .ff-chat-heading small {
+    font-size: 10px;
+  }
+  .finflow-landing .ff-ai-chat .ff-badge {
+    display: inline;
+    font-size: 9px;
+  }
+  .finflow-landing .ff-prompt-options button {
+    font-size: 10px;
+  }
+  .finflow-landing .ff-ai-answer {
+    min-height: 125px;
+  }
+  .finflow-landing .ff-ai-answer p {
+    font-size: 13px;
+  }
+  .finflow-landing .ff-privacy {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .finflow-landing .ff-privacy-heading > p {
+    max-width: 480px;
+  }
+  .finflow-landing .ff-privacy-features {
+    gap: 22px;
+  }
+  .finflow-landing .ff-privacy-features p {
+    font-size: 13px;
+  }
+  .finflow-landing .ff-faq {
+    grid-template-columns: 1fr;
+    gap: 35px;
+    padding-bottom: 85px;
+  }
+  .finflow-landing .ff-final {
+    width: calc(100% - 56px);
+    padding: 45px 25px;
+  }
+  .finflow-landing .ff-final h2 {
+    font-size: 39px;
+  }
+  .finflow-landing .ff-footer-links {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 16px;
+    font-size: 10px;
+    max-width: 330px;
+  }
+  .finflow-landing .ff-footer-bottom {
+    font-size: 8px;
+  }
+}
+@media (max-width: 600px) {
+  .finflow-landing .ff-container {
+    padding-inline: 21px;
+  }
+  .finflow-landing .ff-navbar {
+    min-height: 70px;
+    gap: 10px;
+  }
+  .finflow-landing .ff-brand {
+    font-size: 24px;
+  }
+  .finflow-landing .ff-brand > span:first-child {
+    width: 29px;
+    height: 29px;
+    border-radius: 9px;
+    margin-right: 7px;
+  }
+  .finflow-landing .ff-brand svg {
+    width: 21px;
+  }
+  .finflow-landing .ff-nav-actions {
+    gap: 8px;
+  }
+  .finflow-landing .ff-nav-actions > .ff-account-link {
+    display: none;
+  }
+  .finflow-landing .ff-icon-button {
+    width: 34px;
+    height: 38px;
+  }
+  .finflow-landing .ff-system-button {
+    width: 27px;
+  }
+  .finflow-landing .ff-kicker {
+    font-size: 8px;
+    letter-spacing: 1.1px;
+    margin-bottom: 20px;
+  }
+  .finflow-landing .ff-hero {
+    padding-top: 43px;
+    padding-bottom: 32px;
+    gap: 36px;
+  }
+  .finflow-landing .ff-hero h1 {
+    font-size: 39px;
+    line-height: 1.1;
+    letter-spacing: -1.65px;
+    max-width: 390px;
+  }
+  .finflow-landing .ff-hero-copy > p {
+    font-size: 13px;
+    line-height: 1.9;
+    margin-top: 24px;
+    max-width: 360px;
+  }
+  .finflow-landing .ff-hero-actions {
+    gap: 19px;
+    flex-direction: column;
+    margin-top: 26px;
+  }
+  .finflow-landing .ff-button {
+    font-size: 13px;
+    min-height: 48px;
+    padding: 13px 20px;
+  }
+  .finflow-landing .ff-secondary-link {
+    font-size: 12px;
+  }
+  .finflow-landing .ff-hero-copy > .ff-hero-microcopy {
+    font-size: 9px;
+    margin-top: 20px;
+    gap: 5px;
+  }
+  .finflow-landing .ff-hero-microcopy svg {
+    width: 12px;
+  }
+  .finflow-landing .ff-preview-label {
+    font-size: 6px;
+    letter-spacing: 0.6px;
+    margin-bottom: 10px;
+  }
+  .finflow-landing .ff-preview-label > span:last-child {
+    display: none;
+  }
+  .finflow-landing .ff-preview-note {
+    font-size: 7px;
+    line-height: 1.8;
+    gap: 5px;
+    max-width: 290px;
+    margin: 13px auto 0;
+    text-align: center;
+  }
+  .finflow-landing .dashboard-bezel {
+    padding: 4px;
+    border-radius: 13px;
+  }
+  .finflow-landing .dashboard {
+    border-radius: 9px;
+  }
+  .finflow-landing .app-topbar {
+    padding: 0 12px;
+    min-height: 35px;
+    font-size: 7px;
+  }
+  .finflow-landing .demo-tag {
+    font-size: 5px;
+    letter-spacing: 0.3px;
+  }
+  .finflow-landing .app-content {
+    padding: 17px 12px 12px;
+  }
+  .finflow-landing .app-greeting {
+    font-size: 8px;
+  }
+  .finflow-landing .app-heading h3 {
+    font-size: 16px;
+  }
+  .finflow-landing .period-select select {
+    font-size: 7px;
+  }
+  .finflow-landing .period-select > svg {
+    width: 10px;
+  }
+  .finflow-landing .mobile-dashboard-tabs {
+    font-size: 8px;
+    gap: 18px;
+    margin-bottom: 14px;
+  }
+  .finflow-landing .metric-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  .finflow-landing .metric:first-child {
+    grid-column: span 2;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    padding: 13px;
+  }
+  .finflow-landing .metric:first-child > span {
+    grid-column: 1;
+    font-size: 9px;
+  }
+  .finflow-landing .metric:first-child > strong {
+    grid-column: 1;
+    font-size: 29px;
+    margin: 7px 0 0;
+  }
+  .finflow-landing .metric:first-child > small {
+    grid-column: 2;
+    grid-row: 2;
+    font-size: 8px;
+  }
+  .finflow-landing .metric {
+    padding: 11px;
+  }
+  .finflow-landing .metric > strong {
+    font-size: 20px;
+  }
+  .finflow-landing .metric > span {
+    font-size: 8px;
+  }
+  .finflow-landing .dashboard-middle {
+    grid-template-columns: 1fr;
+    margin-bottom: 12px;
+  }
+  .finflow-landing .budget-panel {
+    display: none;
+  }
+  .finflow-landing .chart {
+    height: 130px;
+  }
+  .finflow-landing .panel-heading h4 {
+    font-size: 9px;
+  }
+  .finflow-landing .transactions {
+    padding: 11px 9px 0;
+  }
+  .finflow-landing .transaction-date {
+    display: none;
+  }
+  .finflow-landing .transaction > strong {
+    margin-left: auto;
+    font-size: 9px;
+    min-width: 76px;
+  }
+  .finflow-landing .transaction > div > strong {
+    font-size: 8px;
+  }
+  .finflow-landing .transaction > div > small {
+    font-size: 6px;
+  }
+  .finflow-landing .demo-controls {
+    font-size: 6px;
+    gap: 8px;
+  }
+  .finflow-landing .demo-controls > span {
+    max-width: 145px;
+    line-height: 1.7;
+  }
+  .finflow-landing .demo-controls > span > svg {
+    width: 10px;
+  }
+  .finflow-landing .demo-controls button {
+    font-size: 7px;
+  }
+  .finflow-landing .invoice-view {
+    gap: 8px;
+    min-height: 185px;
+  }
+  .finflow-landing .credit-card {
+    padding: 12px;
+    gap: 10px;
+  }
+  .finflow-landing .credit-card > span {
+    font-size: 9px;
+  }
+  .finflow-landing .credit-card > small {
+    font-size: 7px;
+  }
+  .finflow-landing .credit-card > strong {
+    font-size: 18px;
+  }
+  .finflow-landing .ff-promise-strip {
+    max-width: calc(100% - 42px);
+    padding-inline: 0;
+    padding-block: 22px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    font-size: 12px;
+  }
+  .finflow-landing .ff-promise-strip > span {
+    justify-content: center;
+  }
+  .finflow-landing .ff-section {
+    padding-top: 74px;
+  }
+  .finflow-landing h2,
+  .finflow-landing .ff-section-heading h2 {
+    font-size: 34px;
+    line-height: 1.17;
+    letter-spacing: -1.3px;
+  }
+  .finflow-landing .ff-section-heading > p {
+    font-size: 14px;
+    line-height: 1.85;
+    margin-top: 21px;
+  }
+  .finflow-landing .ff-features-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .finflow-landing .ff-feature-card {
+    border-radius: 17px;
+  }
+  .finflow-landing .ff-feature-copy {
+    padding: 27px;
+  }
+  .finflow-landing .ff-feature-copy h3 {
+    font-size: 28px;
+    letter-spacing: -0.9px;
+  }
+  .finflow-landing .ff-feature-copy p {
+    font-size: 14px;
+    line-height: 1.85;
+  }
+  .finflow-landing .ff-card-preview {
+    padding: 5px 27px 27px;
+    min-height: 305px;
+  }
+  .finflow-landing .ff-physical-card {
+    left: 27px;
+    bottom: 127px;
+    width: 220px;
+    min-height: 157px;
+  }
+  .finflow-landing .ff-invoice {
+    margin-left: 18%;
+    margin-top: 45px;
+    padding: 18px;
+  }
+  .finflow-landing .ff-invoice > strong {
+    font-size: 31px;
+  }
+  .finflow-landing .ff-invoice > div:first-child {
+    font-size: 10px;
+  }
+  .finflow-landing .ff-invoice-row {
+    font-size: 10px;
+  }
+  .finflow-landing .ff-invoice > button {
+    font-size: 11px;
+  }
+  .finflow-landing .ff-budget-preview {
+    padding: 0 27px 30px;
+  }
+  .finflow-landing .ff-budget-preview > div {
+    margin-top: 26px;
+  }
+  .finflow-landing .ff-budget-preview > div > div:first-child {
+    font-size: 13px;
+  }
+  .finflow-landing .ff-budget-preview > div > div:first-child > span {
+    font-size: 10px;
+  }
+  .finflow-landing .ff-budget-preview > div > span {
+    font-size: 10px;
+  }
+  .finflow-landing .ff-message-feature {
+    grid-column: auto;
+    grid-template-columns: 1fr;
+    padding: 0;
+    gap: 0;
+  }
+  .finflow-landing .ff-message-feature .ff-feature-copy {
+    padding-bottom: 20px;
+  }
+  .finflow-landing .ff-telegram {
+    margin: 0 22px 24px;
+    padding: 19px;
+  }
+  .finflow-landing .ff-chat-heading strong {
+    font-size: 12px;
+  }
+  .finflow-landing .ff-chat-heading small {
+    font-size: 9px;
+  }
+  .finflow-landing .ff-chat-message {
+    font-size: 12px;
+    max-width: 92%;
+  }
+  .finflow-landing .ff-chat-input {
+    font-size: 10px;
+    padding: 13px 11px;
+  }
+  .finflow-landing .ff-goals {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  .finflow-landing .ff-goal-story h2 {
+    font-size: 35px;
+  }
+  .finflow-landing .ff-goal-story > p {
+    font-size: 14px;
+    max-width: 350px;
+  }
+  .finflow-landing .ff-goal-photo {
+    height: 220px;
+    margin-top: 25px;
+    max-width: none;
+  }
+  .finflow-landing .ff-goal-photo strong {
+    font-size: 15px;
+  }
+  .finflow-landing .ff-calculator {
+    padding: 25px 22px;
+    border-radius: 17px;
+  }
+  .finflow-landing .ff-calculator-title h3 {
+    font-size: 13px;
+  }
+  .finflow-landing .ff-calculator-title p {
+    font-size: 9px;
+  }
+  .finflow-landing .ff-range-label {
+    font-size: 11px;
+  }
+  .finflow-landing .ff-range-label strong {
+    font-size: 17px;
+  }
+  .finflow-landing .ff-calculator-result {
+    padding: 20px;
+  }
+  .finflow-landing .ff-calculator-result > strong {
+    font-size: 34px;
+  }
+  .finflow-landing .ff-calculator-result > div:last-child {
+    font-size: 9px;
+  }
+  .finflow-landing .ff-ai-panel {
+    padding: 27px 20px 20px;
+    gap: 28px;
+    border-radius: 18px;
+  }
+  .finflow-landing .ff-ai-copy h2 {
+    font-size: 33px;
+    letter-spacing: -1.2px;
+  }
+  .finflow-landing .ff-ai-copy > .ff-kicker {
+    font-size: 6.5px;
+    letter-spacing: 0.6px;
+    gap: 6px;
+  }
+  .finflow-landing .ff-ai-copy > p {
+    font-size: 13px;
+    line-height: 1.9;
+  }
+  .finflow-landing .ff-ai-benefit {
+    font-size: 10px;
+    line-height: 1.7;
+    gap: 6px;
+    align-items: flex-start;
+  }
+  .finflow-landing .ff-ai-benefit > svg {
+    margin-top: 2px;
+    width: 14px;
+  }
+  .finflow-landing .ff-ai-copy > .ff-fineprint {
+    font-size: 9px;
+    line-height: 1.85;
+  }
+  .finflow-landing .ff-ai-chat {
+    padding: 17px;
+    border-radius: 13px;
+  }
+  .finflow-landing .ff-ai-chat .ff-chat-heading strong {
+    font-size: 11px;
+  }
+  .finflow-landing .ff-ai-chat .ff-chat-heading small {
+    font-size: 8px;
+  }
+  .finflow-landing .ff-ai-chat .ff-badge {
+    display: none;
+  }
+  .finflow-landing .ff-prompt-options {
+    gap: 6px;
+    margin-bottom: 18px;
+  }
+  .finflow-landing .ff-prompt-options button {
+    font-size: 8px;
+    padding: 7px 8px;
+  }
+  .finflow-landing .ff-ai-chat .ff-chat-message {
+    font-size: 12px;
+    padding: 11px 12px;
+  }
+  .finflow-landing .ff-ai-answer {
+    gap: 7px;
+    margin-top: 20px;
+    min-height: 190px;
+  }
+  .finflow-landing .ff-ai-answer p {
+    font-size: 12px;
+    line-height: 1.9;
+  }
+  .finflow-landing .ff-ai-answer-result {
+    font-size: 8px;
+    padding: 7px 8px;
+  }
+  .finflow-landing .ff-ai-chat-footer {
+    font-size: 8px;
+    align-items: flex-start;
+    gap: 5px;
+    line-height: 1.8;
+  }
+  .finflow-landing .ff-ai-chat-footer svg {
+    margin-top: 1px;
+  }
+  .finflow-landing .ff-privacy {
+    gap: 34px;
+  }
+  .finflow-landing .ff-privacy-heading > p {
+    font-size: 14px;
+    line-height: 1.85;
+  }
+  .finflow-landing .ff-privacy-heading > .ff-text-link {
+    font-size: 11px;
+    gap: 7px;
+    margin-top: 23px;
+  }
+  .finflow-landing .ff-privacy-features article {
+    gap: 14px;
+  }
+  .finflow-landing .ff-privacy-features .ff-feature-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+  }
+  .finflow-landing .ff-privacy-features h3 {
+    font-size: 16px;
+  }
+  .finflow-landing .ff-privacy-features p {
+    font-size: 12px;
+    line-height: 1.85;
+  }
+  .finflow-landing .ff-faq {
+    padding-bottom: 74px;
+    gap: 28px;
+  }
+  .finflow-landing .ff-faq summary {
+    font-size: 12px;
+    gap: 16px;
+    line-height: 1.8;
+  }
+  .finflow-landing .ff-faq summary > svg {
+    width: 17px;
+  }
+  .finflow-landing .ff-faq details > p {
+    font-size: 12px;
+    line-height: 1.9;
+  }
+  .finflow-landing .ff-final {
+    width: calc(100% - 42px);
+    padding: 38px 20px 33px;
+    border-radius: 17px;
+  }
+  .finflow-landing .ff-final h2 {
+    font-size: 32px;
+    letter-spacing: -1.2px;
+  }
+  .finflow-landing .ff-final > p {
+    font-size: 12px;
+    line-height: 1.9;
+    margin-top: 18px;
+  }
+  .finflow-landing .ff-final > small {
+    font-size: 8px;
+    line-height: 1.8;
+  }
+  .finflow-landing .ff-final-icon {
+    height: 48px;
+    width: 48px;
+    border-radius: 14px;
+    margin-bottom: 22px;
+  }
+  .finflow-landing .ff-footer {
+    padding-top: 46px;
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  .finflow-landing .ff-footer > div > p {
+    font-size: 12px;
+  }
+  .finflow-landing .ff-footer-links {
+    max-width: 100%;
+    justify-content: flex-start;
+    gap: 17px;
+    font-size: 10px;
+    padding: 0;
+  }
+  .finflow-landing .ff-footer-bottom {
+    grid-column: auto;
+    flex-wrap: wrap;
+    font-size: 8px;
+    gap: 15px;
+    padding: 23px 0;
+  }
+  .finflow-landing .ff-footer-bottom > span:first-child {
+    width: 100%;
+  }
+  .finflow-landing .ff-footer-bottom > a {
+    margin-left: auto;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .finflow-landing *,
+  .finflow-landing *::before,
+  .finflow-landing *::after {
+    /* biome-ignore lint/complexity/noImportantStyles: Respect the user's reduced-motion preference over component animations. */
+    animation: none !important;
+    /* biome-ignore lint/complexity/noImportantStyles: Respect the user's reduced-motion preference over component transitions. */
+    transition: none !important;
+    /* biome-ignore lint/complexity/noImportantStyles: Reduced motion takes precedence over smooth scrolling. */
+    scroll-behavior: auto !important;
+  }
+}

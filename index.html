@@ -4,22 +4,45 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#09090b" />
-    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#fafafa" />
+    <meta name="color-scheme" content="light dark" />
+    <script id="finflow-theme-init">
+      (() => {
+        let preference = "system";
+        try {
+          const saved = localStorage.getItem("finflow-theme");
+          if (saved === "light" || saved === "dark") preference = saved;
+        } catch {}
+        const dark =
+          preference === "dark" ||
+          (preference === "system" &&
+            matchMedia("(prefers-color-scheme: dark)").matches);
+        const theme = dark ? "dark" : "light";
+        const root = document.documentElement;
+        root.classList.add(theme);
+        root.dataset.theme = theme;
+        root.dataset.themePreference = preference;
+        root.style.colorScheme = theme;
+        root.style.backgroundColor = dark ? "#09090b" : "#fafafa";
+        document
+          .querySelector('meta[name="theme-color"]')
+          .setAttribute("content", dark ? "#09090b" : "#fafafa");
+      })();
+    </script>
     <meta
       name="description"
-      content="Controle financeiro com precisão em centavos inteiros. Web, CLI, Telegram e agentes de IA conectados. Explore a demonstração gratuita do FinFlow, sem cadastro."
+      content="Organize suas contas, antecipe faturas e acompanhe metas com simplicidade. Conheça o FinFlow e conecte seu assistente de IA para cuidar das finanças."
     />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="pt_BR" />
     <meta property="og:site_name" content="FinFlow" />
     <meta
       property="og:title"
-      content="FinFlow — Suas finanças, na sua linguagem."
+      content="FinFlow — O dinheiro organizado. A cabeça mais leve."
     />
     <meta
       property="og:description"
-      content="Precisão em cada centavo. Web, terminal, Telegram e IA, em um só sistema. Experimente a demonstração."
+      content="Suas contas em um só lugar, faturas sob controle e um plano para suas metas. Conheça a demonstração gratuita."
     />
     <meta
       property="og:url"
@@ -32,7 +55,7 @@
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="canonical" href="https://finflow-landing-umber.vercel.app/" />
     <link rel="preconnect" href="https://images.unsplash.com" />
-    <title>FinFlow — Suas finanças, na sua linguagem.</title>
+    <title>FinFlow — O dinheiro organizado. A cabeça mais leve.</title>
   </head>
   <body>
     <div id="root"></div>
