@@ -1,20 +1,28 @@
 import {
+  ArrowDownLeft,
   ArrowRight,
   ArrowUpRight,
   AudioLines,
+  BatteryCharging,
   Check,
   CheckCheck,
   CreditCard,
   Download,
   HeartHandshake,
+  LayoutDashboard,
   LockKeyhole,
   Menu,
   MessageCircle,
+  Monitor,
   Plus,
   Send,
   ShieldCheck,
+  Smartphone,
   Sparkles,
+  Target,
+  TrendingUp,
   Wallet,
+  Wifi,
   X,
 } from "lucide-react";
 import { useEffect, useId, useRef, useState } from "react";
@@ -26,6 +34,7 @@ import { ThemeToggle } from "./ThemeToggle";
 import "./landing.css";
 
 const links = [
+  ["App Mobile", "#mobile"],
   ["Recursos", "#recursos"],
   ["Controle de Cartões", "#cartoes"],
   ["Assistente de IA", "#assistente"],
@@ -42,9 +51,15 @@ function StartButton({ children = "Comece agora" }: { children?: React.ReactNode
   );
 }
 
-function AccountAccess({ href, onNavigate }: { href?: string; onNavigate?: () => void }) {
-  const dialog = useRef<HTMLDialogElement>(null);
-  const titleId = useId();
+function AccountAccess({
+  href,
+  onNavigate,
+  onOpenDialog,
+}: {
+  href?: string;
+  onNavigate?: () => void;
+  onOpenDialog?: () => void;
+}) {
   if (href) {
     return (
       <a className="ff-account-link" href={href} onClick={onNavigate}>
@@ -54,53 +69,17 @@ function AccountAccess({ href, onNavigate }: { href?: string; onNavigate?: () =>
     );
   }
   return (
-    <>
-      <button
-        type="button"
-        className="ff-account-link"
-        onClick={() => {
-          onNavigate?.();
-          dialog.current?.showModal();
-        }}
-      >
-        Acessar minha conta
-        <ArrowUpRight size={15} />
-      </button>
-      <dialog ref={dialog} className="ff-account-dialog" aria-labelledby={titleId}>
-        <form method="dialog">
-          <button type="submit" className="ff-icon-button" aria-label="Fechar acesso à conta">
-            <X size={20} />
-          </button>
-        </form>
-        <span className="ff-feature-icon">
-          <Wallet size={24} />
-        </span>
-        <h2 id={titleId}>
-          Seu próximo passo
-          <br />
-          começa por aqui.
-        </h2>
-        <p>
-          O acesso à conta ainda não está disponível nesta página. Enquanto preparamos essa etapa,
-          você pode conhecer o FinFlow em uma demonstração gratuita, sem cadastro.
-        </p>
-        <button
-          className="ff-button"
-          type="button"
-          onClick={() => {
-            dialog.current?.close();
-            document.getElementById("demonstracao")?.scrollIntoView({
-              behavior: matchMedia("(prefers-reduced-motion: reduce)").matches
-                ? "instant"
-                : "smooth",
-            });
-          }}
-        >
-          Explorar demonstração
-          <ArrowUpRight size={17} />
-        </button>
-      </dialog>
-    </>
+    <button
+      type="button"
+      className="ff-account-link"
+      onClick={() => {
+        onNavigate?.();
+        onOpenDialog?.();
+      }}
+    >
+      Acessar minha conta
+      <ArrowUpRight size={15} />
+    </button>
   );
 }
 
@@ -108,6 +87,8 @@ function Navbar({ accountHref }: { accountHref?: string }) {
   const [open, setOpen] = useState(false);
   const menuButton = useRef<HTMLButtonElement>(null);
   const mobileNav = useRef<HTMLElement>(null);
+  const dialog = useRef<HTMLDialogElement>(null);
+  const titleId = useId();
 
   useEffect(() => {
     if (!open) return;
@@ -179,7 +160,7 @@ function Navbar({ accountHref }: { accountHref?: string }) {
         </div>
         <div className="ff-nav-actions">
           <ThemeToggle />
-          <AccountAccess href={accountHref} />
+          <AccountAccess href={accountHref} onOpenDialog={() => dialog.current?.showModal()} />
           <button
             ref={menuButton}
             type="button"
@@ -214,10 +195,50 @@ function Navbar({ accountHref }: { accountHref?: string }) {
                 <span>Aparência</span>
                 <ThemeToggle />
               </div>
-              <AccountAccess href={accountHref} onNavigate={() => setOpen(false)} />
+              <AccountAccess
+                href={accountHref}
+                onNavigate={() => setOpen(false)}
+                onOpenDialog={() => dialog.current?.showModal()}
+              />
             </div>
           </nav>
         </div>
+      )}
+      {!accountHref && (
+        <dialog ref={dialog} className="ff-account-dialog" aria-labelledby={titleId}>
+          <form method="dialog">
+            <button type="submit" className="ff-icon-button" aria-label="Fechar acesso à conta">
+              <X size={20} />
+            </button>
+          </form>
+          <span className="ff-feature-icon">
+            <Wallet size={24} />
+          </span>
+          <h2 id={titleId}>
+            Seu próximo passo
+            <br />
+            começa por aqui.
+          </h2>
+          <p>
+            O acesso à conta ainda não está disponível nesta página. Enquanto preparamos essa etapa,
+            você pode conhecer o FinFlow em uma demonstração gratuita, sem cadastro.
+          </p>
+          <button
+            className="ff-button"
+            type="button"
+            onClick={() => {
+              dialog.current?.close();
+              document.getElementById("demonstracao")?.scrollIntoView({
+                behavior: matchMedia("(prefers-reduced-motion: reduce)").matches
+                  ? "instant"
+                  : "smooth",
+              });
+            }}
+          >
+            Explorar demonstração
+            <ArrowUpRight size={17} />
+          </button>
+        </dialog>
       )}
     </header>
   );
@@ -241,18 +262,18 @@ function Hero() {
         </p>
         <div className="ff-hero-actions">
           <StartButton />
-          <a className="ff-secondary-link" href="#recursos">
+          <a className="ff-secondary-link" href="#mobile">
             Veja como funciona
             <ArrowRight size={17} />
           </a>
         </div>
         <p className="ff-hero-microcopy">
           <Check size={14} />
-          Explore a demonstração. Sem cadastro, sem cartão.
+          Explore a demonstração no computador ou na tela mobile. Sem cadastro, sem cartão.
         </p>
         <div className="ff-hero-note">
           <span>
-            <HeartHandshake size={20} />
+            <HeartHandshake size={19} />
           </span>
           <p>
             O dinheiro organizado.
@@ -264,12 +285,334 @@ function Hero() {
       <div className="ff-hero-preview">
         <div className="ff-preview-label">
           <span className="ff-status-dot" />
-          EXPERIMENTE COM DADOS ILUSTRATIVOS<span>Feito para a vida real</span>
+          EXPERIMENTE COM DADOS ILUSTRATIVOS<span>Alterne entre Web e Mobile</span>
         </div>
         <DemoDashboard />
         <div className="ff-preview-note">
           <ShieldCheck size={13} />
           Apenas uma demonstração. Nenhuma conta bancária é acessada.
+        </div>
+      </div>
+    </section>
+  );
+}
+
+const mobileScreens = [
+  {
+    id: "inicio",
+    badge: "Visão diária",
+    title: "Saldo livre e orçamento em um olhar",
+    description:
+      "Abra o app no celular e saiba exatamente quanto ainda pode gastar na semana, com barras visuais por categoria.",
+  },
+  {
+    id: "lancamento",
+    badge: "Botão central (+)",
+    title: "Registre um gasto em 3 segundos",
+    description:
+      "Toque no botão verde central da barra inferior, confirme o valor e a categoria com uma mão só e siga o seu dia.",
+  },
+  {
+    id: "cartoes",
+    badge: "Carteira mobile",
+    title: "Faturas e metas sempre no bolso",
+    description:
+      "Consulte o limite livre de cada cartão, antecipe parcelas futuras e acompanhe sua reserva de emergência.",
+  },
+] as const;
+
+function MobileExperience() {
+  const [screen, setScreen] = useState<"inicio" | "lancamento" | "cartoes">("inicio");
+  const [quickSaved, setQuickSaved] = useState(false);
+
+  return (
+    <section className="ff-section ff-mobile-showcase ff-container" id="mobile">
+      <div className="ff-mobile-showcase-grid">
+        <div className="ff-mobile-copy">
+          <span className="ff-kicker">
+            <Smartphone size={14} />
+            EXPERIÊNCIA MOBILE NATIVA
+          </span>
+          <h2>
+            No seu bolso, na velocidade
+            <br />
+            da sua rotina.
+          </h2>
+          <p>
+            A tela mobile do FinFlow foi desenhada com navegação na parte inferior e botão central
+            de ação rápida — perfeita para registrar um café na fila ou conferir a fatura antes de
+            comprar.
+          </p>
+
+          <fieldset className="ff-mobile-screen-Switch" aria-label="Telas do aplicativo móvel">
+            {mobileScreens.map((item) => (
+              <button
+                key={item.id}
+                type="button"
+                className={`ff-mobile-step-card ${screen === item.id ? "active" : ""}`}
+                aria-pressed={screen === item.id}
+                onClick={() => setScreen(item.id)}
+              >
+                <div className="ff-mobile-step-header">
+                  <strong>{item.title}</strong>
+                  <span className="ff-badge">{item.badge}</span>
+                </div>
+                <p>{item.description}</p>
+              </button>
+            ))}
+          </fieldset>
+        </div>
+
+        <div className="ff-mobile-stage">
+          <div className="ff-iphone-bezel">
+            <div className="ff-iphone-screen">
+              <div className="ff-iphone-statusbar" aria-hidden="true">
+                <span className="ff-iphone-time">09:41</span>
+                <div className="ff-dynamic-island">
+                  <span className="ff-island-dot" />
+                  <AudioLines size={12} />
+                </div>
+                <div className="ff-iphone-icons">
+                  <Wifi size={13} />
+                  <BatteryCharging size={15} />
+                </div>
+              </div>
+
+              <div className="ff-iphone-appbar">
+                <div className="ff-iphone-user">
+                  <span className="ff-iphone-avatar">D</span>
+                  <div>
+                    <small>Bom dia, Daniel</small>
+                    <strong>finflow mobile</strong>
+                  </div>
+                </div>
+                <span className="ff-iphone-pill">Nov 2026</span>
+              </div>
+
+              <div className="ff-iphone-body">
+                {screen === "inicio" && (
+                  <div className="ff-iphone-view">
+                    <div className="ff-mobile-hero-card">
+                      <div className="ff-mobile-hero-top">
+                        <span>Saldo livre no mês</span>
+                        <span className="ff-mobile-trend">
+                          <TrendingUp size={12} /> +12,8%
+                        </span>
+                      </div>
+                      <strong className="ff-mobile-hero-balance">
+                        {quickSaved ? "R$ 6.388,00" : "R$ 6.420,00"}
+                      </strong>
+                      <div className="ff-mobile-hero-split">
+                        <div>
+                          <small>Entradas</small>
+                          <span>R$ 12.500,00</span>
+                        </div>
+                        <div>
+                          <small>Saídas</small>
+                          <span>{quickSaved ? "R$ 6.112,00" : "R$ 6.080,00"}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="ff-mobile-section-block">
+                      <div className="ff-mobile-row-head">
+                        <span>Ritmo dos orçamentos</span>
+                        <small>3 ativos</small>
+                      </div>
+                      <div className="ff-mobile-mini-budgets">
+                        <div className="ff-mobile-mini-budget">
+                          <div>
+                            <strong>Alimentação</strong>
+                            <span>64%</span>
+                          </div>
+                          <div className="ff-progress">
+                            <span className="ff-income-bg" style={{ width: "64%" }} />
+                          </div>
+                        </div>
+                        <div className="ff-mobile-mini-budget">
+                          <div>
+                            <strong>Lazer</strong>
+                            <span>82%</span>
+                          </div>
+                          <div className="ff-progress">
+                            <span className="ff-warning-bg" style={{ width: "82%" }} />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="ff-mobile-section-block">
+                      <div className="ff-mobile-row-head">
+                        <span>Hoje no celular</span>
+                        <small>Tempo real</small>
+                      </div>
+                      <div className="ff-mobile-feed">
+                        {quickSaved && (
+                          <div className="ff-mobile-feed-item highlight">
+                            <span className="ff-feed-dot" />
+                            <div>
+                              <strong>Padaria Artesanal</strong>
+                              <small>Agora · Alimentação</small>
+                            </div>
+                            <strong>− R$ 32,00</strong>
+                          </div>
+                        )}
+                        <div className="ff-mobile-feed-item">
+                          <span className="ff-feed-dot" />
+                          <div>
+                            <strong>Uber Viagem</strong>
+                            <small>08:45 · Transporte</small>
+                          </div>
+                          <strong>− R$ 28,90</strong>
+                        </div>
+                        <div className="ff-mobile-feed-item">
+                          <span className="ff-feed-dot income" />
+                          <div>
+                            <strong>Reembolso Pix</strong>
+                            <small>Ontem · Conta principal</small>
+                          </div>
+                          <strong className="ff-income">+ R$ 180,00</strong>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {screen === "lancamento" && (
+                  <div className="ff-iphone-view">
+                    <div className="ff-mobile-sheet">
+                      <div className="ff-mobile-sheet-handle" aria-hidden="true" />
+                      <div className="ff-mobile-row-head">
+                        <strong>Novo lançamento rápido</strong>
+                        <span className="ff-badge">Despesa</span>
+                      </div>
+                      <div className="ff-mobile-amount-box">
+                        <small>Valor da compra</small>
+                        <strong>R$ 32,00</strong>
+                        <span>Padaria Artesanal · Café da manhã</span>
+                      </div>
+                      <div className="ff-mobile-chips">
+                        <span className="active">Alimentação</span>
+                        <span>Transporte</span>
+                        <span>Lazer</span>
+                      </div>
+                      <div className="ff-mobile-pay-row">
+                        <CreditCard size={15} />
+                        <span>Nubank Ultravioleta · Crédito à vista</span>
+                      </div>
+                      <button
+                        type="button"
+                        className="ff-mobile-confirm-btn"
+                        onClick={() => {
+                          setQuickSaved(!quickSaved);
+                        }}
+                      >
+                        <Check size={15} />
+                        {quickSaved ? "Lançamento salvo · Desfazer" : "Confirmar no celular"}
+                      </button>
+                    </div>
+                  </div>
+                )}
+
+                {screen === "cartoes" && (
+                  <div className="ff-iphone-view">
+                    <div className="ff-mobile-wallet-card">
+                      <div className="ff-mobile-wallet-top">
+                        <span>Ultravioleta ·••• 4829</span>
+                        <CreditCard size={17} />
+                      </div>
+                      <small>Fatura aberta</small>
+                      <strong>R$ 2.384,50</strong>
+                      <div className="ff-mobile-wallet-bar">
+                        <span style={{ width: "24%" }} />
+                      </div>
+                      <div className="ff-mobile-wallet-foot">
+                        <span>Limite livre: R$ 7.615,50</span>
+                        <span>Fecha dia 08</span>
+                      </div>
+                    </div>
+
+                    <div className="ff-mobile-goal-card">
+                      <div className="ff-mobile-row-head">
+                        <strong>Reserva de tranquilidade</strong>
+                        <span className="ff-income">84%</span>
+                      </div>
+                      <p>R$ 25.200 guardados de R$ 30.000</p>
+                      <div className="ff-progress">
+                        <span className="ff-income-bg" style={{ width: "84%" }} />
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              <fieldset className="ff-iphone-tabbar" aria-label="Navegação inferior do app">
+                <button
+                  type="button"
+                  className={screen === "inicio" ? "active" : ""}
+                  onClick={() => setScreen("inicio")}
+                >
+                  <LayoutDashboard size={16} />
+                  <span>Início</span>
+                </button>
+                <button
+                  type="button"
+                  className={screen === "inicio" ? "" : ""}
+                  onClick={() => setScreen("inicio")}
+                >
+                  <ArrowDownLeft size={16} />
+                  <span>Extrato</span>
+                </button>
+                <button
+                  type="button"
+                  className="ff-iphone-fab"
+                  aria-label="Abrir lançamento rápido no celular"
+                  onClick={() => setScreen("lancamento")}
+                >
+                  <Plus size={20} />
+                </button>
+                <button
+                  type="button"
+                  className={screen === "cartoes" ? "active" : ""}
+                  onClick={() => setScreen("cartoes")}
+                >
+                  <CreditCard size={16} />
+                  <span>Cartões</span>
+                </button>
+                <button
+                  type="button"
+                  className={screen === "cartoes" ? "" : ""}
+                  onClick={() => setScreen("cartoes")}
+                >
+                  <Target size={16} />
+                  <span>Metas</span>
+                </button>
+              </fieldset>
+              <div className="ff-iphone-homebar" aria-hidden="true" />
+            </div>
+          </div>
+
+          <div className="ff-mobile-stage-pills">
+            <div className="ff-mobile-floating-card">
+              <span className="ff-feature-icon">
+                <Check size={16} />
+              </span>
+              <div>
+                <strong>Sincronizado com a Web</strong>
+                <small>Comece no celular, analise no notebook</small>
+              </div>
+            </div>
+
+            <div className="ff-mobile-floating-card">
+              <span className="ff-feature-icon">
+                <Monitor size={16} />
+              </span>
+              <div>
+                <strong>Barra inferior ergonômica</strong>
+                <small>Tudo ao alcance do polegar</small>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -283,7 +626,7 @@ function CardPreview() {
       <div className="ff-physical-card">
         <span>
           Seu cartão
-          <CreditCard size={24} />
+          <CreditCard size={22} />
         </span>
         <div className="ff-card-chip" />
         <span>
@@ -627,7 +970,7 @@ function Privacy() {
 const questions = [
   {
     q: "Preciso entender de tecnologia para usar?",
-    a: "Não para organizar suas finanças pela interface visual. Você acompanha contas, cartões, orçamentos e metas sem usar comandos. A conexão com IA e o Telegram são opções extras que dependem de configuração.",
+    a: "Não para organizar suas finanças pela interface visual. Você acompanha contas, cartões, orçamentos e metas tanto no computador quanto no celular sem usar comandos. A conexão com IA e o Telegram são opções extras que dependem de configuração.",
   },
   {
     q: "O FinFlow se conecta automaticamente ao meu banco?",
@@ -694,6 +1037,7 @@ function Footer() {
           </p>
         </div>
         <div className="ff-footer-links">
+          <a href="#mobile">App Mobile</a>
           <a href="#recursos">Recursos</a>
           <a href="#cartoes">Cartões</a>
           <a href="#assistente">Assistente de IA</a>
@@ -729,6 +1073,10 @@ export function LandingPage({ accountHref }: { accountHref?: string }) {
           </span>
           <span>
             <Check size={16} />
+            Experiência Web e App Mobile
+          </span>
+          <span>
+            <Check size={16} />
             Faturas sob controle
           </span>
           <span>
@@ -736,6 +1084,7 @@ export function LandingPage({ accountHref }: { accountHref?: string }) {
             Um plano para suas metas
           </span>
         </div>
+        <MobileExperience />
         <DailyFeatures />
         <GoalCalculator />
         <AIAssistant />
