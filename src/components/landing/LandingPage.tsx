@@ -1,28 +1,26 @@
 import {
   ArrowDownLeft,
+  ArrowLeftRight,
   ArrowRight,
   ArrowUpRight,
   AudioLines,
-  BatteryCharging,
+  Bell,
   Check,
   CheckCheck,
+  ChevronRight,
   CreditCard,
   Download,
-  HeartHandshake,
   LayoutDashboard,
   LockKeyhole,
   Menu,
   MessageCircle,
-  Monitor,
   Plus,
   Send,
   ShieldCheck,
-  Smartphone,
   Sparkles,
   Target,
   TrendingUp,
   Wallet,
-  Wifi,
   X,
 } from "lucide-react";
 import { useEffect, useId, useRef, useState } from "react";
@@ -34,9 +32,9 @@ import { ThemeToggle } from "./ThemeToggle";
 import "./landing.css";
 
 const links = [
-  ["App Mobile", "#mobile"],
   ["Recursos", "#recursos"],
-  ["Controle de Cartões", "#cartoes"],
+  ["No celular", "#mobile"],
+  ["Cartões", "#cartoes"],
   ["Assistente de IA", "#assistente"],
   ["Segurança", "#seguranca"],
 ];
@@ -131,9 +129,7 @@ function Navbar({ accountHref }: { accountHref?: string }) {
     };
 
     const handleResize = () => {
-      if (window.innerWidth > 1024) {
-        setOpen(false);
-      }
+      if (window.innerWidth > 1024) setOpen(false);
     };
 
     window.addEventListener("keydown", handleKeyDown);
@@ -186,7 +182,7 @@ function Navbar({ accountHref }: { accountHref?: string }) {
               {links.map(([label, href]) => (
                 <a href={href} key={href} onClick={() => setOpen(false)}>
                   {label}
-                  <ArrowUpRight size={16} />
+                  <ChevronRight size={18} />
                 </a>
               ))}
             </div>
@@ -212,13 +208,9 @@ function Navbar({ accountHref }: { accountHref?: string }) {
             </button>
           </form>
           <span className="ff-feature-icon">
-            <Wallet size={24} />
+            <Wallet size={22} />
           </span>
-          <h2 id={titleId}>
-            Seu próximo passo
-            <br />
-            começa por aqui.
-          </h2>
+          <h2 id={titleId}>Seu próximo passo começa por aqui.</h2>
           <p>
             O acesso à conta ainda não está disponível nesta página. Enquanto preparamos essa etapa,
             você pode conhecer o FinFlow em uma demonstração gratuita, sem cadastro.
@@ -248,10 +240,6 @@ function Hero() {
   return (
     <section className="ff-hero ff-container" id="inicio">
       <div className="ff-hero-copy">
-        <span className="ff-kicker">
-          <span className="ff-status-dot" />
-          MENOS PREOCUPAÇÃO. MAIS VIDA.
-        </span>
         <h1>
           O controle total do seu dinheiro, com a{" "}
           <span className="ff-hero-emphasis">simplicidade</span> que você sempre quis.
@@ -267,352 +255,350 @@ function Hero() {
             <ArrowRight size={17} />
           </a>
         </div>
-        <p className="ff-hero-microcopy">
-          <Check size={14} />
-          Explore a demonstração no computador ou na tela mobile. Sem cadastro, sem cartão.
-        </p>
-        <div className="ff-hero-note">
-          <span>
-            <HeartHandshake size={19} />
-          </span>
-          <p>
-            O dinheiro organizado.
-            <br />
-            <strong>A cabeça mais leve.</strong>
-          </p>
-        </div>
+        <ul className="ff-hero-proof">
+          <li>
+            <Check size={15} />
+            Sem cadastro
+          </li>
+          <li>
+            <Check size={15} />
+            Sem cartão de crédito
+          </li>
+          <li>
+            <Check size={15} />
+            No computador e no celular
+          </li>
+        </ul>
       </div>
       <div className="ff-hero-preview">
-        <div className="ff-preview-label">
-          <span className="ff-status-dot" />
-          EXPERIMENTE COM DADOS ILUSTRATIVOS<span>Alterne entre Web e Mobile</span>
-        </div>
         <DemoDashboard />
-        <div className="ff-preview-note">
-          <ShieldCheck size={13} />
-          Apenas uma demonstração. Nenhuma conta bancária é acessada.
-        </div>
+        <p className="ff-preview-note">
+          <ShieldCheck size={14} />
+          Dados ilustrativos. Nenhuma conta bancária é acessada.
+        </p>
       </div>
     </section>
   );
 }
 
-const mobileScreens = [
+type PhoneScreen = "inicio" | "lancamento" | "cartoes";
+
+const mobileSteps: { id: PhoneScreen; title: string; text: string }[] = [
   {
     id: "inicio",
-    badge: "Visão diária",
-    title: "Saldo livre e orçamento em um olhar",
-    description:
-      "Abra o app no celular e saiba exatamente quanto ainda pode gastar na semana, com barras visuais por categoria.",
+    title: "Saldo livre num relance",
+    text: "Abra o app e veja quanto ainda pode gastar no mês, com cada orçamento em cores.",
   },
   {
     id: "lancamento",
-    badge: "Botão central (+)",
-    title: "Registre um gasto em 3 segundos",
-    description:
-      "Toque no botão verde central da barra inferior, confirme o valor e a categoria com uma mão só e siga o seu dia.",
+    title: "Um gasto em três toques",
+    text: "Toque no + da barra inferior, confirme valor e categoria e siga o seu dia.",
   },
   {
     id: "cartoes",
-    badge: "Carteira mobile",
-    title: "Faturas e metas sempre no bolso",
-    description:
-      "Consulte o limite livre de cada cartão, antecipe parcelas futuras e acompanhe sua reserva de emergência.",
+    title: "Faturas e metas no bolso",
+    text: "Limite de cada cartão, próximas parcelas e o progresso da sua reserva.",
   },
-] as const;
+];
+
+function PhoneHome({ saved }: { saved: boolean }) {
+  return (
+    <div className="ff-phone-view">
+      <div className="ff-phone-greeting">
+        <span className="ff-phone-avatar">D</span>
+        <div>
+          <small>Bom dia,</small>
+          <strong>Daniel</strong>
+        </div>
+        <span className="ff-phone-bell">
+          <Bell size={16} />
+        </span>
+      </div>
+
+      <div className="ff-phone-balance">
+        <small>Saldo livre em novembro</small>
+        <strong>{saved ? "R$ 6.388,00" : "R$ 6.420,00"}</strong>
+        <span>
+          <TrendingUp size={13} />
+          +12,8% em relação a outubro
+        </span>
+      </div>
+
+      <div className="ff-phone-quick">
+        <span>
+          <i>
+            <ArrowDownLeft size={17} />
+          </i>
+          Receita
+        </span>
+        <span>
+          <i>
+            <ArrowUpRight size={17} />
+          </i>
+          Despesa
+        </span>
+        <span>
+          <i>
+            <ArrowLeftRight size={17} />
+          </i>
+          Transferir
+        </span>
+        <span>
+          <i>
+            <Target size={17} />
+          </i>
+          Metas
+        </span>
+      </div>
+
+      <div className="ff-phone-card">
+        <div className="ff-phone-card-head">
+          <strong>Orçamentos</strong>
+          <small>2 de 3 no ritmo</small>
+        </div>
+        <div className="ff-phone-budget">
+          <div>
+            <span>Alimentação</span>
+            <span>{saved ? "67%" : "64%"}</span>
+          </div>
+          <div className="ff-progress">
+            <span className="ff-income-bg" style={{ width: saved ? "67%" : "64%" }} />
+          </div>
+        </div>
+        <div className="ff-phone-budget">
+          <div>
+            <span>Lazer</span>
+            <span>82%</span>
+          </div>
+          <div className="ff-progress">
+            <span className="ff-warning-bg" style={{ width: "82%" }} />
+          </div>
+        </div>
+      </div>
+
+      <div className="ff-phone-list">
+        <strong className="ff-phone-list-title">Hoje</strong>
+        {saved && (
+          <div className="ff-phone-row is-new">
+            <span className="ff-phone-row-icon">
+              <Wallet size={15} />
+            </span>
+            <div>
+              <strong>Padaria</strong>
+              <small>Agora</small>
+            </div>
+            <strong>− R$ 32,00</strong>
+          </div>
+        )}
+        <div className="ff-phone-row">
+          <span className="ff-phone-row-icon">
+            <ArrowLeftRight size={15} />
+          </span>
+          <div>
+            <strong>Uber</strong>
+            <small>08:45</small>
+          </div>
+          <strong>− R$ 28,90</strong>
+        </div>
+        {!saved && (
+          <div className="ff-phone-row">
+            <span className="ff-phone-row-icon income">
+              <ArrowDownLeft size={15} />
+            </span>
+            <div>
+              <strong>Reembolso Pix</strong>
+              <small>07:12</small>
+            </div>
+            <strong className="ff-income">+ R$ 180,00</strong>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function PhoneQuickAdd({ saved, onToggle }: { saved: boolean; onToggle: () => void }) {
+  return (
+    <div className="ff-phone-view ff-phone-sheet-view">
+      <div className="ff-phone-sheet-head">
+        <strong>Nova despesa</strong>
+        <span>Hoje, 09:41</span>
+      </div>
+      <div className="ff-phone-amount">
+        <small>Valor</small>
+        <strong>R$ 32,00</strong>
+        <span>Padaria</span>
+      </div>
+      <div className="ff-phone-field">
+        <small>Categoria</small>
+        <div className="ff-phone-chips">
+          <span className="active">Alimentação</span>
+          <span>Transporte</span>
+          <span>Lazer</span>
+        </div>
+      </div>
+      <div className="ff-phone-field">
+        <small>Pagar com</small>
+        <div className="ff-phone-account">
+          <CreditCard size={16} />
+          <span>Cartão final 4829</span>
+          <ChevronRight size={16} />
+        </div>
+      </div>
+      <button type="button" className="ff-phone-confirm" onClick={onToggle}>
+        {saved ? <CheckCheck size={17} /> : <Check size={17} />}
+        {saved ? "Registrada. Toque para desfazer" : "Registrar despesa"}
+      </button>
+    </div>
+  );
+}
+
+function PhoneCards() {
+  return (
+    <div className="ff-phone-view">
+      <div className="ff-phone-sheet-head">
+        <strong>Cartões</strong>
+        <span>Novembro</span>
+      </div>
+      <div className="ff-phone-credit">
+        <div>
+          <span>FinFlow Black</span>
+          <CreditCard size={18} />
+        </div>
+        <small>Fatura aberta</small>
+        <strong>R$ 2.384,50</strong>
+        <div className="ff-phone-credit-bar">
+          <span style={{ width: "24%" }} />
+        </div>
+        <div>
+          <small>Limite livre R$ 7.615,50</small>
+          <small>Fecha dia 08</small>
+        </div>
+      </div>
+      <div className="ff-phone-card">
+        <div className="ff-phone-card-head">
+          <strong>Próximas parcelas</strong>
+          <small>3 compras</small>
+        </div>
+        <div className="ff-phone-installment">
+          <span>Dezembro</span>
+          <strong>R$ 350,00</strong>
+        </div>
+        <div className="ff-phone-installment">
+          <span>Janeiro</span>
+          <strong>R$ 350,00</strong>
+        </div>
+      </div>
+      <div className="ff-phone-card">
+        <div className="ff-phone-card-head">
+          <strong>Reserva de emergência</strong>
+          <small className="ff-income">84%</small>
+        </div>
+        <div className="ff-progress">
+          <span className="ff-income-bg" style={{ width: "84%" }} />
+        </div>
+        <small className="ff-phone-goal-note">R$ 25.200 de R$ 30.000</small>
+      </div>
+    </div>
+  );
+}
 
 function MobileExperience() {
-  const [screen, setScreen] = useState<"inicio" | "lancamento" | "cartoes">("inicio");
-  const [quickSaved, setQuickSaved] = useState(false);
+  const [screen, setScreen] = useState<PhoneScreen>("inicio");
+  const [saved, setSaved] = useState(false);
 
   return (
-    <section className="ff-section ff-mobile-showcase ff-container" id="mobile">
-      <div className="ff-mobile-showcase-grid">
-        <div className="ff-mobile-copy">
-          <span className="ff-kicker">
-            <Smartphone size={14} />
-            EXPERIÊNCIA MOBILE NATIVA
-          </span>
-          <h2>
-            No seu bolso, na velocidade
-            <br />
-            da sua rotina.
-          </h2>
-          <p>
-            A tela mobile do FinFlow foi desenhada com navegação na parte inferior e botão central
-            de ação rápida — perfeita para registrar um café na fila ou conferir a fatura antes de
-            comprar.
-          </p>
-
-          <fieldset className="ff-mobile-screen-Switch" aria-label="Telas do aplicativo móvel">
-            {mobileScreens.map((item) => (
-              <button
-                key={item.id}
-                type="button"
-                className={`ff-mobile-step-card ${screen === item.id ? "active" : ""}`}
-                aria-pressed={screen === item.id}
-                onClick={() => setScreen(item.id)}
-              >
-                <div className="ff-mobile-step-header">
-                  <strong>{item.title}</strong>
-                  <span className="ff-badge">{item.badge}</span>
-                </div>
-                <p>{item.description}</p>
-              </button>
-            ))}
-          </fieldset>
-        </div>
-
+    <section className="ff-section ff-container" id="mobile">
+      <div className="ff-mobile-grid">
         <div className="ff-mobile-stage">
-          <div className="ff-iphone-bezel">
-            <div className="ff-iphone-screen">
-              <div className="ff-iphone-statusbar" aria-hidden="true">
-                <span className="ff-iphone-time">09:41</span>
-                <div className="ff-dynamic-island">
-                  <span className="ff-island-dot" />
-                  <AudioLines size={12} />
-                </div>
-                <div className="ff-iphone-icons">
-                  <Wifi size={13} />
-                  <BatteryCharging size={15} />
-                </div>
+          <div className="ff-phone">
+            <div className="ff-phone-screen">
+              <span className="ff-phone-island" aria-hidden="true" />
+              <div className="ff-phone-status" aria-hidden="true">
+                <span>9:41</span>
+                <span className="ff-phone-signal">
+                  <i />
+                  <i />
+                  <i />
+                  <b />
+                </span>
               </div>
-
-              <div className="ff-iphone-appbar">
-                <div className="ff-iphone-user">
-                  <span className="ff-iphone-avatar">D</span>
-                  <div>
-                    <small>Bom dia, Daniel</small>
-                    <strong>finflow mobile</strong>
-                  </div>
-                </div>
-                <span className="ff-iphone-pill">Nov 2026</span>
-              </div>
-
-              <div className="ff-iphone-body">
-                {screen === "inicio" && (
-                  <div className="ff-iphone-view">
-                    <div className="ff-mobile-hero-card">
-                      <div className="ff-mobile-hero-top">
-                        <span>Saldo livre no mês</span>
-                        <span className="ff-mobile-trend">
-                          <TrendingUp size={12} /> +12,8%
-                        </span>
-                      </div>
-                      <strong className="ff-mobile-hero-balance">
-                        {quickSaved ? "R$ 6.388,00" : "R$ 6.420,00"}
-                      </strong>
-                      <div className="ff-mobile-hero-split">
-                        <div>
-                          <small>Entradas</small>
-                          <span>R$ 12.500,00</span>
-                        </div>
-                        <div>
-                          <small>Saídas</small>
-                          <span>{quickSaved ? "R$ 6.112,00" : "R$ 6.080,00"}</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="ff-mobile-section-block">
-                      <div className="ff-mobile-row-head">
-                        <span>Ritmo dos orçamentos</span>
-                        <small>3 ativos</small>
-                      </div>
-                      <div className="ff-mobile-mini-budgets">
-                        <div className="ff-mobile-mini-budget">
-                          <div>
-                            <strong>Alimentação</strong>
-                            <span>64%</span>
-                          </div>
-                          <div className="ff-progress">
-                            <span className="ff-income-bg" style={{ width: "64%" }} />
-                          </div>
-                        </div>
-                        <div className="ff-mobile-mini-budget">
-                          <div>
-                            <strong>Lazer</strong>
-                            <span>82%</span>
-                          </div>
-                          <div className="ff-progress">
-                            <span className="ff-warning-bg" style={{ width: "82%" }} />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="ff-mobile-section-block">
-                      <div className="ff-mobile-row-head">
-                        <span>Hoje no celular</span>
-                        <small>Tempo real</small>
-                      </div>
-                      <div className="ff-mobile-feed">
-                        {quickSaved && (
-                          <div className="ff-mobile-feed-item highlight">
-                            <span className="ff-feed-dot" />
-                            <div>
-                              <strong>Padaria Artesanal</strong>
-                              <small>Agora · Alimentação</small>
-                            </div>
-                            <strong>− R$ 32,00</strong>
-                          </div>
-                        )}
-                        <div className="ff-mobile-feed-item">
-                          <span className="ff-feed-dot" />
-                          <div>
-                            <strong>Uber Viagem</strong>
-                            <small>08:45 · Transporte</small>
-                          </div>
-                          <strong>− R$ 28,90</strong>
-                        </div>
-                        <div className="ff-mobile-feed-item">
-                          <span className="ff-feed-dot income" />
-                          <div>
-                            <strong>Reembolso Pix</strong>
-                            <small>Ontem · Conta principal</small>
-                          </div>
-                          <strong className="ff-income">+ R$ 180,00</strong>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
+              <div className="ff-phone-body">
+                {screen === "inicio" && <PhoneHome saved={saved} />}
                 {screen === "lancamento" && (
-                  <div className="ff-iphone-view">
-                    <div className="ff-mobile-sheet">
-                      <div className="ff-mobile-sheet-handle" aria-hidden="true" />
-                      <div className="ff-mobile-row-head">
-                        <strong>Novo lançamento rápido</strong>
-                        <span className="ff-badge">Despesa</span>
-                      </div>
-                      <div className="ff-mobile-amount-box">
-                        <small>Valor da compra</small>
-                        <strong>R$ 32,00</strong>
-                        <span>Padaria Artesanal · Café da manhã</span>
-                      </div>
-                      <div className="ff-mobile-chips">
-                        <span className="active">Alimentação</span>
-                        <span>Transporte</span>
-                        <span>Lazer</span>
-                      </div>
-                      <div className="ff-mobile-pay-row">
-                        <CreditCard size={15} />
-                        <span>Nubank Ultravioleta · Crédito à vista</span>
-                      </div>
-                      <button
-                        type="button"
-                        className="ff-mobile-confirm-btn"
-                        onClick={() => {
-                          setQuickSaved(!quickSaved);
-                        }}
-                      >
-                        <Check size={15} />
-                        {quickSaved ? "Lançamento salvo · Desfazer" : "Confirmar no celular"}
-                      </button>
-                    </div>
-                  </div>
+                  <PhoneQuickAdd saved={saved} onToggle={() => setSaved(!saved)} />
                 )}
-
-                {screen === "cartoes" && (
-                  <div className="ff-iphone-view">
-                    <div className="ff-mobile-wallet-card">
-                      <div className="ff-mobile-wallet-top">
-                        <span>Ultravioleta ·••• 4829</span>
-                        <CreditCard size={17} />
-                      </div>
-                      <small>Fatura aberta</small>
-                      <strong>R$ 2.384,50</strong>
-                      <div className="ff-mobile-wallet-bar">
-                        <span style={{ width: "24%" }} />
-                      </div>
-                      <div className="ff-mobile-wallet-foot">
-                        <span>Limite livre: R$ 7.615,50</span>
-                        <span>Fecha dia 08</span>
-                      </div>
-                    </div>
-
-                    <div className="ff-mobile-goal-card">
-                      <div className="ff-mobile-row-head">
-                        <strong>Reserva de tranquilidade</strong>
-                        <span className="ff-income">84%</span>
-                      </div>
-                      <p>R$ 25.200 guardados de R$ 30.000</p>
-                      <div className="ff-progress">
-                        <span className="ff-income-bg" style={{ width: "84%" }} />
-                      </div>
-                    </div>
-                  </div>
-                )}
+                {screen === "cartoes" && <PhoneCards />}
               </div>
-
-              <fieldset className="ff-iphone-tabbar" aria-label="Navegação inferior do app">
+              <fieldset className="ff-phone-tabbar" aria-label="Navegação do aplicativo">
                 <button
                   type="button"
                   className={screen === "inicio" ? "active" : ""}
                   onClick={() => setScreen("inicio")}
                 >
-                  <LayoutDashboard size={16} />
-                  <span>Início</span>
+                  <LayoutDashboard size={18} />
+                  Início
+                </button>
+                <button type="button" onClick={() => setScreen("inicio")}>
+                  <ArrowLeftRight size={18} />
+                  Extrato
                 </button>
                 <button
                   type="button"
-                  className={screen === "inicio" ? "" : ""}
-                  onClick={() => setScreen("inicio")}
-                >
-                  <ArrowDownLeft size={16} />
-                  <span>Extrato</span>
-                </button>
-                <button
-                  type="button"
-                  className="ff-iphone-fab"
-                  aria-label="Abrir lançamento rápido no celular"
+                  className="ff-phone-fab"
+                  aria-label="Registrar despesa rápida"
                   onClick={() => setScreen("lancamento")}
                 >
-                  <Plus size={20} />
+                  <Plus size={22} />
                 </button>
                 <button
                   type="button"
                   className={screen === "cartoes" ? "active" : ""}
                   onClick={() => setScreen("cartoes")}
                 >
-                  <CreditCard size={16} />
-                  <span>Cartões</span>
+                  <CreditCard size={18} />
+                  Cartões
                 </button>
-                <button
-                  type="button"
-                  className={screen === "cartoes" ? "" : ""}
-                  onClick={() => setScreen("cartoes")}
-                >
-                  <Target size={16} />
-                  <span>Metas</span>
+                <button type="button" onClick={() => setScreen("cartoes")}>
+                  <Target size={18} />
+                  Metas
                 </button>
               </fieldset>
-              <div className="ff-iphone-homebar" aria-hidden="true" />
+              <span className="ff-phone-home" aria-hidden="true" />
             </div>
           </div>
-
-          <div className="ff-mobile-stage-pills">
-            <div className="ff-mobile-floating-card">
-              <span className="ff-feature-icon">
-                <Check size={16} />
-              </span>
-              <div>
-                <strong>Sincronizado com a Web</strong>
-                <small>Comece no celular, analise no notebook</small>
-              </div>
-            </div>
-
-            <div className="ff-mobile-floating-card">
-              <span className="ff-feature-icon">
-                <Monitor size={16} />
-              </span>
-              <div>
-                <strong>Barra inferior ergonômica</strong>
-                <small>Tudo ao alcance do polegar</small>
-              </div>
-            </div>
+          <div className={`ff-phone-toast ${saved ? "is-visible" : ""}`} aria-live="polite">
+            {saved && (
+              <>
+                <span>
+                  <Check size={14} />
+                </span>
+                Despesa de R$ 32,00 registrada
+              </>
+            )}
           </div>
+        </div>
+
+        <div className="ff-mobile-copy">
+          <h2>O FinFlow cabe no bolso.</h2>
+          <p>
+            No celular, a navegação fica embaixo, ao alcance do polegar, e o botão + registra um
+            gasto antes de você guardar o troco.
+          </p>
+          <fieldset className="ff-mobile-steps" aria-label="Telas do aplicativo">
+            {mobileSteps.map((step) => (
+              <button
+                key={step.id}
+                type="button"
+                className="ff-mobile-step"
+                aria-pressed={screen === step.id}
+                onClick={() => setScreen(step.id)}
+              >
+                <strong>{step.title}</strong>
+                <span>{step.text}</span>
+              </button>
+            ))}
+          </fieldset>
         </div>
       </div>
     </section>
@@ -623,18 +609,19 @@ function CardPreview() {
   const [future, setFuture] = useState(false);
   return (
     <div className="ff-card-preview">
-      <div className="ff-physical-card">
-        <span>
-          Seu cartão
-          <CreditCard size={22} />
-        </span>
-        <div className="ff-card-chip" />
-        <span>
-          •••• 4829<span>FinFlow</span>
-        </span>
+      <div className="ff-physical-card" aria-hidden="true">
+        <div>
+          <span>FinFlow</span>
+          <CreditCard size={20} />
+        </div>
+        <span className="ff-card-chip" />
+        <div>
+          <span>•••• 4829</span>
+          <span>12/29</span>
+        </div>
       </div>
       <div className="ff-invoice">
-        <div>
+        <div className="ff-invoice-head">
           <span>Próxima fatura</span>
           <span className="ff-badge">{future ? "Dezembro" : "Novembro"}</span>
         </div>
@@ -649,7 +636,7 @@ function CardPreview() {
         </div>
         <button type="button" onClick={() => setFuture(!future)}>
           {future ? "Voltar à fatura atual" : "Ver o próximo mês"}
-          <ArrowRight size={14} />
+          <ArrowRight size={15} />
         </button>
       </div>
     </div>
@@ -672,7 +659,7 @@ function BudgetPreview() {
           amount: "R$ 410 de R$ 500",
           percent: 82,
           color: "warning",
-          status: "Um pouco de atenção",
+          status: "Pede atenção",
         },
         {
           title: "Transporte",
@@ -682,7 +669,7 @@ function BudgetPreview() {
           status: "Perto do limite",
         },
       ].map((b) => (
-        <div key={b.title}>
+        <div className="ff-budget-item" key={b.title}>
           <div>
             <strong>{b.title}</strong>
             <span>{b.amount}</span>
@@ -690,8 +677,8 @@ function BudgetPreview() {
           <div className="ff-progress">
             <span className={`ff-${b.color}-bg`} style={{ width: `${b.percent}%` }} />
           </div>
-          <span className={`ff-${b.color}`}>
-            {b.percent}% utilizado · {b.status}
+          <span className={`ff-budget-status ff-${b.color}`}>
+            {b.percent}% usado, {b.status.toLowerCase()}
           </span>
         </div>
       ))}
@@ -704,19 +691,19 @@ function TelegramPreview() {
   return (
     <div className="ff-telegram">
       <div className="ff-chat-heading">
-        <span className="ff-feature-icon">
-          <Send size={20} />
+        <span className="ff-chat-avatar">
+          <Send size={17} />
         </span>
         <div>
           <strong>FinFlow no Telegram</strong>
-          <small>O gasto anotado, a vida seguindo.</small>
+          <small>bot conectado</small>
         </div>
       </div>
       <div className="ff-chat-message ff-chat-outgoing">
         45,90 almoço #alimentacao
         <small>
           12:42
-          <CheckCheck size={12} />
+          <CheckCheck size={13} />
         </small>
       </div>
       <div className="ff-chat-message ff-chat-incoming">
@@ -725,7 +712,7 @@ function TelegramPreview() {
           Pronto, almoço registrado.
         </span>
         <strong>R$ 45,90</strong>
-        <small>Alimentação · Dados ilustrativos</small>
+        <small>Alimentação, dados ilustrativos</small>
       </div>
       {sent && (
         <div className="ff-chat-message ff-chat-incoming" role="status">
@@ -745,15 +732,12 @@ function TelegramPreview() {
 function DailyFeatures() {
   return (
     <section className="ff-section ff-container" id="recursos">
-      <div className="ff-section-heading">
-        <div>
-          <span className="ff-kicker">PARA O SEU DIA A DIA</span>
-          <h2>
-            Menos “para onde foi?”.
-            <br />
-            Mais “está tudo aqui”.
-          </h2>
-        </div>
+      <div className="ff-section-head">
+        <h2>
+          Menos “para onde foi?”.
+          <br />
+          Mais “está tudo aqui”.
+        </h2>
         <p>
           Do café de hoje aos planos para o ano que vem. Um lugar para entender, organizar e seguir
           em frente.
@@ -763,13 +747,9 @@ function DailyFeatures() {
         <article className="ff-feature-card ff-cards-feature" id="cartoes">
           <div className="ff-feature-copy">
             <span className="ff-feature-icon">
-              <CreditCard size={22} />
+              <CreditCard size={20} />
             </span>
-            <h3>
-              Cartões e faturas
-              <br />
-              sem surpresa.
-            </h3>
+            <h3>Cartões e faturas sem surpresa.</h3>
             <p>
               Saiba o que já comprou e o que ainda vem nas próximas parcelas. O fim do mês não
               precisa ser uma surpresa.
@@ -780,16 +760,12 @@ function DailyFeatures() {
         <article className="ff-feature-card ff-budgets-feature">
           <div className="ff-feature-copy">
             <span className="ff-feature-icon">
-              <Wallet size={22} />
+              <Wallet size={20} />
             </span>
-            <h3>
-              Seu limite.
-              <br />
-              No seu ritmo.
-            </h3>
+            <h3>Seu limite, no seu ritmo.</h3>
             <p>
-              Veja quanto ainda pode gastar em cada categoria. Cores que ajudam a decidir, sem
-              precisar fazer conta de cabeça.
+              Veja quanto ainda pode gastar em cada categoria. Cores que ajudam a decidir, sem fazer
+              conta de cabeça.
             </p>
           </div>
           <BudgetPreview />
@@ -797,20 +773,18 @@ function DailyFeatures() {
         <article className="ff-feature-card ff-message-feature">
           <div className="ff-feature-copy">
             <span className="ff-feature-icon">
-              <MessageCircle size={22} />
+              <MessageCircle size={20} />
             </span>
-            <h3>
-              Aconteceu.
-              <br />
-              Anotou. Seguiu.
-            </h3>
+            <h3>Aconteceu. Anotou. Seguiu.</h3>
             <p>
-              Lançou o gasto na hora, sem esquecer nada. Registre por texto no Telegram, mesmo no
+              Lance o gasto na hora, sem esquecer nada. Registre por texto no Telegram, mesmo no
               meio da correria.
             </p>
             <span className="ff-fineprint">Disponível nas instalações com o bot configurado.</span>
           </div>
-          <TelegramPreview />
+          <div className="ff-telegram-stage">
+            <TelegramPreview />
+          </div>
         </article>
       </div>
     </section>
@@ -830,7 +804,7 @@ const prompts = [
     answer:
       "Almoço de R$ 35,00 registrado em Alimentação. O orçamento do mês foi atualizado. Mais um gasto que não ficou para depois.",
     label: "Registrar uma despesa",
-    value: "R$ 35,00 · Alimentação",
+    value: "R$ 35,00 em Alimentação",
   },
   {
     question: "Me ajude a entender meus gastos.",
@@ -848,23 +822,21 @@ function AIAssistant() {
     <section className="ff-section ff-container" id="assistente">
       <div className="ff-ai-panel">
         <div className="ff-ai-copy">
-          <span className="ff-kicker">
-            <Sparkles size={15} />
-            UM NOVO JEITO DE CUIDAR DAS CONTAS
-          </span>
           <h2>Conecte seu agente de IA via CLI ou MCP</h2>
           <p>
             Prefere conversar em vez de preencher formulários? Conecte seu assistente pessoal, como
             Claude ou agentes locais, para consultar saldos, registrar compras por linguagem natural
             e analisar gastos sem abrir planilhas.
           </p>
-          <div className="ff-ai-benefit">
-            <Check size={16} />O seu assistente. Com o contexto das suas finanças.
-          </div>
-          <div className="ff-ai-benefit">
-            <Check size={16} />
-            Você decide o que quer consultar ou registrar.
-          </div>
+          <ul className="ff-ai-benefits">
+            <li>
+              <Check size={16} />O seu assistente, com o contexto das suas finanças.
+            </li>
+            <li>
+              <Check size={16} />
+              Você decide o que quer consultar ou registrar.
+            </li>
+          </ul>
           <p className="ff-fineprint">
             A conexão depende de um assistente compatível e de configuração na sua instalação. Os
             exemplos ao lado são simulações locais.
@@ -872,14 +844,13 @@ function AIAssistant() {
         </div>
         <div className="ff-ai-chat">
           <div className="ff-chat-heading">
-            <span className="ff-feature-icon">
-              <Sparkles size={20} />
+            <span className="ff-chat-avatar">
+              <Sparkles size={17} />
             </span>
             <div>
               <strong>Seu assistente financeiro</strong>
-              <small>Uma conversa que traz clareza.</small>
+              <small>simulação local</small>
             </div>
-            <span className="ff-badge">Demonstração</span>
           </div>
           <fieldset className="ff-prompt-options" aria-label="Exemplos de conversa">
             {prompts.map((p, i) => (
@@ -896,7 +867,7 @@ function AIAssistant() {
           <div className="ff-chat-message ff-chat-outgoing">{sample.question}</div>
           <div className="ff-ai-answer" aria-live="polite">
             <span className="ff-ai-answer-icon">
-              <Sparkles size={17} />
+              <Sparkles size={15} />
             </span>
             <div>
               <p>{sample.answer}</p>
@@ -920,7 +891,6 @@ function Privacy() {
   return (
     <section className="ff-section ff-privacy ff-container" id="seguranca">
       <div className="ff-privacy-heading">
-        <span className="ff-kicker">O CONTROLE TAMBÉM É SEU</span>
         <h2>
           Seu dinheiro.
           <br />
@@ -931,7 +901,7 @@ function Privacy() {
         </p>
         <a className="ff-text-link" href="#demonstracao">
           Experimente exportar seus dados
-          <Download size={17} />
+          <Download size={16} />
         </a>
       </div>
       <div className="ff-privacy-features">
@@ -954,7 +924,7 @@ function Privacy() {
         ].map(({ icon: Icon, title, text }) => (
           <article key={title}>
             <span className="ff-feature-icon">
-              <Icon size={21} />
+              <Icon size={19} />
             </span>
             <div>
               <h3>{title}</h3>
@@ -970,7 +940,7 @@ function Privacy() {
 const questions = [
   {
     q: "Preciso entender de tecnologia para usar?",
-    a: "Não para organizar suas finanças pela interface visual. Você acompanha contas, cartões, orçamentos e metas tanto no computador quanto no celular sem usar comandos. A conexão com IA e o Telegram são opções extras que dependem de configuração.",
+    a: "Não para organizar suas finanças pela interface visual. Você acompanha contas, cartões, orçamentos e metas no computador ou no celular, sem usar comandos. A conexão com IA e o Telegram são opções extras que dependem de configuração.",
   },
   {
     q: "O FinFlow se conecta automaticamente ao meu banco?",
@@ -989,19 +959,16 @@ const questions = [
 function FAQ() {
   return (
     <section className="ff-section ff-faq ff-container" id="duvidas">
-      <div>
-        <span className="ff-kicker">PODE PERGUNTAR</span>
-        <h2>
-          Clareza desde
-          <br />o primeiro passo.
-        </h2>
-      </div>
+      <h2>
+        Clareza desde
+        <br />o primeiro passo.
+      </h2>
       <div>
         {questions.map((item) => (
           <details key={item.q}>
             <summary>
               {item.q}
-              <Plus size={19} />
+              <Plus size={18} />
             </summary>
             <p>{item.a}</p>
           </details>
@@ -1015,30 +982,28 @@ function Footer() {
   return (
     <>
       <section className="ff-final ff-container">
-        <span className="ff-final-icon">
-          <AudioLines size={30} />
-        </span>
-        <h2>
-          Mais tranquilidade.
-          <br />
-          <span>Um passo de cada vez.</span>
-        </h2>
-        <p>Conheça um jeito mais simples de cuidar do seu dinheiro.</p>
-        <StartButton>Comece agora</StartButton>
-        <small>Demonstração gratuita. Sem cadastro, sem cartão.</small>
+        <div className="ff-final-inner">
+          <span className="ff-final-icon">
+            <AudioLines size={26} strokeWidth={2.2} />
+          </span>
+          <h2>
+            Mais tranquilidade.
+            <br />
+            <span>Um passo de cada vez.</span>
+          </h2>
+          <p>Conheça um jeito mais simples de cuidar do seu dinheiro.</p>
+          <StartButton>Comece agora</StartButton>
+          <small>Demonstração gratuita. Sem cadastro, sem cartão.</small>
+        </div>
       </section>
       <footer className="ff-footer ff-container">
         <div>
           <Brand />
-          <p>
-            O dinheiro organizado.
-            <br />
-            Mais espaço para viver.
-          </p>
+          <p>O dinheiro organizado. Mais espaço para viver.</p>
         </div>
         <div className="ff-footer-links">
-          <a href="#mobile">App Mobile</a>
           <a href="#recursos">Recursos</a>
+          <a href="#mobile">No celular</a>
           <a href="#cartoes">Cartões</a>
           <a href="#assistente">Assistente de IA</a>
           <a href="#seguranca">Privacidade</a>
@@ -1046,9 +1011,8 @@ function Footer() {
         </div>
         <div className="ff-footer-bottom">
           <span>© {year} FinFlow. Feito para a vida real.</span>
-          <span>Uma demonstração. Muitas possibilidades.</span>
           <a href="#inicio">
-            De volta ao início
+            Voltar ao início
             <ArrowUpRight size={14} />
           </a>
         </div>
@@ -1066,24 +1030,6 @@ export function LandingPage({ accountHref }: { accountHref?: string }) {
       <Navbar accountHref={accountHref} />
       <main id="ff-content">
         <Hero />
-        <div className="ff-promise-strip ff-container">
-          <span>
-            <Check size={16} />
-            Suas contas em um só lugar
-          </span>
-          <span>
-            <Check size={16} />
-            Experiência Web e App Mobile
-          </span>
-          <span>
-            <Check size={16} />
-            Faturas sob controle
-          </span>
-          <span>
-            <Check size={16} />
-            Um plano para suas metas
-          </span>
-        </div>
         <MobileExperience />
         <DailyFeatures />
         <GoalCalculator />

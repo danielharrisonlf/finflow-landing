@@ -11,7 +11,6 @@ export function GoalCalculator() {
   return (
     <section className="ff-section ff-goals ff-container" id="metas">
       <div className="ff-goal-story">
-        <span className="ff-kicker">UM PLANO PARA O QUE IMPORTA</span>
         <h2>
           Seus planos merecem
           <br />
