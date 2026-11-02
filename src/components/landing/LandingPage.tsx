@@ -42,26 +42,30 @@ function StartButton({ children = "Comece agora" }: { children?: React.ReactNode
   );
 }
 
-function AccountAccess({ href }: { href?: string }) {
+function AccountAccess({ href, onNavigate }: { href?: string; onNavigate?: () => void }) {
   const dialog = useRef<HTMLDialogElement>(null);
   const titleId = useId();
+  if (href) {
+    return (
+      <a className="ff-account-link" href={href} onClick={onNavigate}>
+        Acessar minha conta
+        <ArrowUpRight size={15} />
+      </a>
+    );
+  }
   return (
     <>
-      {href ? (
-        <a className="ff-account-link" href={href}>
-          Acessar minha conta
-          <ArrowUpRight size={15} />
-        </a>
-      ) : (
-        <button
-          type="button"
-          className="ff-account-link"
-          onClick={() => dialog.current?.showModal()}
-        >
-          Acessar minha conta
-          <ArrowUpRight size={15} />
-        </button>
-      )}
+      <button
+        type="button"
+        className="ff-account-link"
+        onClick={() => {
+          onNavigate?.();
+          dialog.current?.showModal();
+        }}
+      >
+        Acessar minha conta
+        <ArrowUpRight size={15} />
+      </button>
       <dialog ref={dialog} className="ff-account-dialog" aria-labelledby={titleId}>
         <form method="dialog">
           <button type="submit" className="ff-icon-button" aria-label="Fechar acesso à conta">
@@ -103,17 +107,65 @@ function AccountAccess({ href }: { href?: string }) {
 function Navbar({ accountHref }: { accountHref?: string }) {
   const [open, setOpen] = useState(false);
   const menuButton = useRef<HTMLButtonElement>(null);
+  const mobileNav = useRef<HTMLElement>(null);
+
   useEffect(() => {
     if (!open) return;
-    const close = (event: KeyboardEvent) => {
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         setOpen(false);
         menuButton.current?.focus();
+        return;
+      }
+      if (event.key === "Tab" && mobileNav.current && menuButton.current) {
+        const focusables = [
+          menuButton.current,
+          ...Array.from(
+            mobileNav.current.querySelectorAll<HTMLElement>(
+              'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+            ),
+          ).filter((el) => el.getClientRects().length > 0),
+        ];
+        if (focusables.length === 0) return;
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last?.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first?.focus();
+        }
       }
     };
-    window.addEventListener("keydown", close);
-    return () => window.removeEventListener("keydown", close);
+
+    const handlePointerDown = (event: PointerEvent) => {
+      const target = event.target as Node | null;
+      if (target && !mobileNav.current?.contains(target) && !menuButton.current?.contains(target)) {
+        setOpen(false);
+      }
+    };
+
+    const handleResize = () => {
+      if (window.innerWidth > 1024) {
+        setOpen(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("pointerdown", handlePointerDown);
+    window.addEventListener("resize", handleResize);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("pointerdown", handlePointerDown);
+      window.removeEventListener("resize", handleResize);
+    };
   }, [open]);
+
   return (
     <header className="ff-header">
       <nav className="ff-navbar ff-container" aria-label="Navegação principal">
@@ -142,15 +194,30 @@ function Navbar({ accountHref }: { accountHref?: string }) {
         </div>
       </nav>
       {open && (
-        <nav id="ff-mobile-nav" className="ff-mobile-nav" aria-label="Navegação móvel">
-          {links.map(([label, href]) => (
-            <a href={href} key={href} onClick={() => setOpen(false)}>
-              {label}
-              <ArrowUpRight size={16} />
-            </a>
-          ))}
-          <AccountAccess href={accountHref} />
-        </nav>
+        <div className="ff-mobile-backdrop">
+          <nav
+            ref={mobileNav}
+            id="ff-mobile-nav"
+            className="ff-mobile-nav"
+            aria-label="Navegação móvel"
+          >
+            <div className="ff-mobile-nav-links">
+              {links.map(([label, href]) => (
+                <a href={href} key={href} onClick={() => setOpen(false)}>
+                  {label}
+                  <ArrowUpRight size={16} />
+                </a>
+              ))}
+            </div>
+            <div className="ff-mobile-nav-footer">
+              <div className="ff-mobile-theme-row">
+                <span>Aparência</span>
+                <ThemeToggle />
+              </div>
+              <AccountAccess href={accountHref} onNavigate={() => setOpen(false)} />
+            </div>
+          </nav>
+        </div>
       )}
     </header>
   );

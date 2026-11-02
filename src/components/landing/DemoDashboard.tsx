@@ -227,6 +227,7 @@ export function DemoDashboard() {
                           y2={y}
                           stroke="var(--ff-border)"
                           strokeDasharray="3 5"
+                          vectorEffect="non-scaling-stroke"
                         />
                       ))}
                       <path
@@ -246,6 +247,7 @@ export function DemoDashboard() {
                         fill="none"
                         stroke="var(--ff-income)"
                         strokeWidth="2.5"
+                        vectorEffect="non-scaling-stroke"
                       />
                       <path
                         d="M0 139 C45 140 55 127 95 133 S160 108 210 117 S280 100 330 109 S410 85 460 96 S550 74 600 80"
@@ -253,6 +255,7 @@ export function DemoDashboard() {
                         stroke="var(--ff-expense)"
                         strokeWidth="1.5"
                         strokeDasharray="4 5"
+                        vectorEffect="non-scaling-stroke"
                       />
                     </svg>
                     <div className="chart-months">
